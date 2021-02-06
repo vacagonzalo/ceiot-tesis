@@ -1,0 +1,224 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 2.3 (25/3/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Version 2.x major modifications by:
+% Vel (vel@latextemplates.com)
+%
+% This template is based on a template by:
+% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------
+
+\documentclass[
+11pt,
+spanish,
+singlespacing,
+parskip,
+headsepline,
+]{MastersDoctoralThesis}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{palatino}
+
+\usepackage[backend=bibtex,natbib=true, style=numeric, sorting=none]{biblatex}
+
+\addbibresource{references.bib}
+
+\usepackage[autostyle=true]{csquotes}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+%------------------------
+\usepackage{listings}
+\urlstyle{same}
+\hyphenation{biblatex}
+%--------------------------
+
+\usepackage{color}
+
+%-------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%-------------------------------------------------------------------------------
+
+\geometry{
+	paper=a4paper,
+	inner=2cm,
+	outer=3.3cm,
+	bindingoffset=2cm,
+	top=1.5cm,
+	bottom=1.5cm,
+}
+
+%-------------------------------------------------------------------------------
+%	INFORMACIÓN DE LA MEMORIA
+%-------------------------------------------------------------------------------
+
+\thesistitle{Monitoreo ambiental integrado a Enterprise Buildings Integrator} % \ttitle
+\degree{Especialista en Internet de las Cosas} % \degreename
+\author{Ing. Gonzalo Nahuel Vaca} % \authorname
+\supervisor{Esp. Ing. Pablo Almada (FIUBA-UTN)} % \supname
+\juradoUNO{Nombre del jurado 1 (pertenencia)} % \jur1name
+\juradoDOS{Nombre del jurado 2 (pertenencia)} % \jur2name
+\juradoTRES{Nombre del jurado 3 (pertenencia)} % \jur3name
+\fechaINICIO{mayo de 2020}
+\fechaFINAL{abril de 2021}
+
+\subject{Memoria del Trabajo Final de la Carrera de Especialización en Sistemas Embebidos de la UBA} % \subjectname
+\keywords{Sistemas Embebidos, CESE, FIUBA} % \keywordnames
+\university{Universidad de Buenos Aires} % \univname
+\faculty{{Facultad de Ingeniería}} % \facname
+\department{Departamento de Electrónica} % \deptname
+\group{{Laboratorio de Sistemas Embebidos}} % \groupname
+
+
+\hypersetup{pdftitle=\ttitle}
+\hypersetup{pdfauthor=\authorname}
+\hypersetup{pdfkeywords=\keywordnames}
+
+
+\newcaptionname{spanish}{\acknowledgementname}{Agradecimientos}
+\newcaptionname{spanish}{\authorshipname}{Declaración de Autoría}
+\newcaptionname{spanish}{\abbrevname}{Glosario}
+\newcaptionname{spanish}{\byname}{por}
+
+\renewcommand{\lstlistingname}{Algoritmo}
+\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}
+
+\renewcommand{\listtablename}{Índice de Tablas}
+\renewcommand{\tablename}{Tabla} 
+
+\addtolength{\footnotesep}{2mm}
+
+\begin{document}
+
+\frontmatter
+
+\pagestyle{plain}
+
+%-------------------------------------------------------------------------------
+%	CARÁTULA
+%-------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+
+\includegraphics[width=.8\textwidth]{./Figures/logoFIUBA.png}
+\vspace{2cm}
+
+\textsc{\huge{Carrera de Especialización en\\ \vspace{5px} Internet de las Cosas}}
+\vspace{.5cm}
+
+\textsc{\Large Memoria del Trabajo Final}\\[1cm]
+
+{\huge \bfseries \ttitle\par}\vspace{0.4cm}
+
+\vfill
+
+\vspace{2cm}
+\LARGE\textbf{Autor:\\
+\authorname}\\
+
+\vspace{1.5cm}
+
+\large
+{Director:} \\
+{\supname}
+ 
+\vspace{1cm}
+Jurados:\\	
+\jurunoname\\
+\jurdosname\\
+\jurtresname
+
+\vspace{2cm}
+
+\textit{Este trabajo fue realizado en las Ciudad Autónoma de Buenos Aires,\\ entre \fechaINICIOname \hspace{1px} y \fechaFINALname.}
+\end{center}
+\end{titlepage}
+
+
+%-------------------------------------------------------------------------------
+%	RESUMEN - ABSTRACT 
+%-------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname}
+
+\centering
+
+\paragraph{} La presente memoria describe la implementación de un sistema que gestiona una red de sensores industriales y los integra a un sistema propietario de automatización de edificios y gestión empresarial.
+
+\end{abstract}
+
+%-------------------------------------------------------------------------------
+%	LISTA DE CONTENIDOS/FIGURAS/TABLAS
+%-------------------------------------------------------------------------------
+\renewcommand{\listtablename}{Índice de Tablas}
+
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+
+%-------------------------------------------------------------------------------
+%	CONTENIDO DE LA MEMORIA  - DEDICATORIA
+%-------------------------------------------------------------------------------
+
+\dedicatory{\textbf{Dedicado a la memoria del Ing. Valeriy Omelchenko}}
+
+%-------------------------------------------------------------------------------
+%	CONTENIDO DE LA MEMORIA  - CAPÍTULOS
+%-------------------------------------------------------------------------------
+
+\mainmatter
+
+\pagestyle{thesis}
+
+\renewcommand{\tablename}{Tabla} 
+
+\include{Chapters/Chapter1}
+%\include{Chapters/Chapter2} 
+%\include{Chapters/Chapter3}
+%\include{Chapters/Chapter4} 
+%\include{Chapters/Chapter5} 
+
+%-------------------------------------------------------------------------------
+%	CONTENIDO DE LA MEMORIA  - APÉNDICES
+%-------------------------------------------------------------------------------
+
+\appendix
+
+%\include{Appendices/AppendixA}
+%\include{Appendices/AppendixB}
+%\include{Appendices/AppendixC}
+
+%-------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%-------------------------------------------------------------------------------
+
+\Urlmuskip=0mu plus 1mu\relax
+\raggedright
+\printbibliography[heading=bibintoc]
+
+%-------------------------------------------------------------------------------
+
+\end{document}  
