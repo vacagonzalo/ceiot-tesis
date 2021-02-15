@@ -14,69 +14,177 @@
 
 %-------------------------------------------------------------------------------
 
-En este capítulo se presentan la necesidades generales de la industria, y las particulares del cliente que se pretenden satisfacer. Adicionalmente, se provee de una introducción técnica superficial de las tecnologías involucradas.
+El capítulo presenta las necesidades a satisfacer y una introducción técnica. El objetivo es proveer de conceptos básicos para comprender el resto de la memoria.
 
 \section{Motivación}
 \label{motivacion}
 
 	\subsection{Necesidades generales}
+	
+		Se analiza la situación de la industria local, que despertó el interés de realizar el proyecto.
 
 		\subsubsection{Progreso tecnológico}
 
-			La producción de bienes y servicios experimentó una serie de innovaciones, que fueron reemplazando distintas habilidades y características del hombre. Se identifican cuatro hitos en este proceso, los cuales se denominan revoluciones industriales.
+			La producción de bienes y servicios experimentó una serie de cambios, que reemplazaron distintos talentos humanos. Se identifican cuatro etapas, denominadas \emph{revoluciones industriales}.
 		
-			La primer revolución industrial consistió en reemplazar las fuerzas físicas de hombres y bestias, en favor de nuevas fuentes de energía para obtener trabajo. Vapor, combustión, electricidad, ect. 
+			La primera consistió en sustituir las fuerzas físicas de hombres y bestias, en favor de nuevas fuentes de energía para obtener trabajo. Como el vapor o la electricidad. 
 
-			La segunda revolución industrial hizo obsoleta la capacidad de polivalencia de los humanos al crear líneas de montaje, gracias a Henry Ford nació la organización productiva moderna.
+			La segunda revolución industrial suplantó la capacidad de polivalencia al crear líneas de montaje, fue el inicio de la organización productiva moderna.
 
-			Un tercer hito fue la llegada de la electrónica y ordenadores que permitió crear nuevas tecnologías de instrumentación y control, esto permitió reemplazar la motricidad gruesa y fina de las personas, y también desplazó las tareas manuales de control de actuadores. 
+			Un tercer hito fue la llegada de la electrónica y robótica, se reemplazó la motricidad fina y gruesa, y control manual de actuadores. 
 
-			Finalmente, la cuarta y actual revolución industrial consiste en superar las capacidades cognitivas biológicas, al conectar los dispositivos entre sí y con ordenadores que proveen persistencia en las mediciones, y su análisis a través de la inteligencia artificial.
+			La etapa actual (\emph{industria 4.0}) consiste en superar algunas capacidades cognitivas, al interconectar dispositivos y ordenadores. Logrando persistencia en las mediciones, y su análisis usando inteligencia artificial.
 	
 		\subsubsection{Modernización}
 
-			Las plantas de producción que se encuentran en la República Argentina están retrasadas en su progreso tecnológico, la mayoría no ha incorporado sistemas electrónicos en sus procesos o productos. Esto plantea la necesidad de crear un sistema que logre adaptar la antigua tecnología existente, y que permita integrarla a los nuevos paradigmas de trabajo. Finalmente, la actual situación tecnológica, se traduce en la demanda de un sistema que permita unir capital viejo y sus protocolos antiguos, con las nuevas posibilidades que ofrece la cuarta revolución industrial.
+			Las empresas locales están retrasadas en su progreso tecnológico, muchas no incorporaron sistemas electrónicos en sus procesos o productos. Es necesario crear un sistema que logre adaptar la tecnología en uso.
 
 		\subsubsection{Comercio internacional}
 			
-			El avance tecnológico produce cambios en el marco normativo de las naciones, la consecuencia es la necesidad de conformar con requisitos mínimos de capital, para cumplir con los requerimientos jurídicos necesarios para ingresar dentro de nuevos mercados. El retraso tecnológico ya no solo genera una pérdida de competitividad, sino que también implica una barrera legal que impide que las empresas dentro de la jurisdicción argentina, coloquen sus mercancías en otras latitudes. Por incumplimiento en normas que apuntan a la calidad de la producción o a la protección del medio ambiente.
-
-			Las necesidades generales expuestas promovieron el interés de crear un proyecto que permita asistir a las empresas en su incorporación a la cuarta revolución industrial. Si las compañías argentinas no lo lograran, probablemente queden fuera del mercado mundial en pocos años.
+			El avance tecnológico modifica el marco normativo de las naciones, para cumplir con los nuevos requerimientos jurídicos, se necesita tener un mínimo de capital. El retraso tecnológico ya no solo genera una pérdida de competitividad, sino que también impide que las empresas coloquen sus mercancías en otros países. Por incumplimiento en normas de calidad productiva, o de protección del medio ambiente.
 
 	\subsection{Necesidades del cliente}
-	
+		
 		\subsubsection{Gador S.A}
 		
-			\emph{Gador S.A} es una compañía cuya misión es \emph{producir medicamentos para la salud humana, con la mejor calidad disponible, y ponerlos al alcance de la comunidad a precios accesibles}. 
-
-			La arquitectura de monitoreo ambiental dentro de sus plantas se encuentra gestionada por el producto \emph{Enterprise Buildings Integrator (EBI)}, de la empresa \emph{Honeywell}. Esta solución propietaria, fue adquirida con una licencia \emph{modbus universal} y permite comunicarse desde los dispositivos en campo, utilizando solo el \emph{fieldbus} mencionado.
-
-			Hay en planta una serie de \emph{Controladores Lógicos Programables (PLC)} que cumplen la función de ser puntos de agregación para la red de sensores que se encuentra en cada cuarto. El instrumental se comunica con su respectivo \emph{PLC}, a través de protocolos cableados, como pueden ser \emph{4-20mA} y \emph{Digital in/out}. La red que une el servidor \emph{EBI} con los \emph{PLCs} es \emph{Modbus TCP}, como se visualiza en la figura \ref{fig:redGador}.
+			\emph{Gador S.A} es una compañía cuya misión es \emph{producir medicamentos para la salud humana, con la mejor calidad disponible, y ponerlos al alcance de la comunidad a precios accesibles}. La empresa decidió ser el cliente del proyecto realizado.
+			
+			\emph{Gador} tiene la necesidad de medir las condiciones ambientales de sus depósitos y cuartos productivos. En esos lugares se dispusieron sensores de temperatura y humedad, las mediciones son recogidas por \emph{Controladores Lógicos Programables (PLC)}, los \emph{PLC} luego reenvían los datos a un servidor \emph{Enterprise Buildings Integrator (EBI)} que fue comprado con una licencia \emph{Modbus universal} y permite comunicarse con los dispositivos en campo utilizando solo ese protocolo. Las conexiones entre las partes se encuentra visualizada en la figura \ref{fig:redGador}.
+			
+			El principal problema de la arquitectura descripta es que el protocolo \emph{Modbus} fue diseñado en el año 1979 y no es apto para integrarse a las tecnologías de la cuarta revolución industrial. Se necesita un sistema que lo adapte.
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[width=\textwidth]{./Figures/chapter1/redGador.png}
-				\caption{Red industrial actual en Gador.}
+				\begin{tikzpicture}[level 1/.style={sibling distance=5cm},
+									level 2/.style={sibling distance=2.5cm}]
+					\node[circle,draw]{EBI}
+						child{
+							node[rectangle,draw]{PLC 1}
+								child[rectangle,draw]{node[rectangle,draw]{Sensor 1}}
+								child[rectangle,draw]{node[rectangle,draw]{Sensor 2}}
+							}
+						child{
+							node[rectangle,draw]{PLC 2}
+								child{node[rectangle,draw]{Sensor 3}}
+								child{node[rectangle,draw]{Sensor 4}}
+							}
+						child{
+							node[rectangle,draw]{PLC N}
+								child{node[rectangle,draw]{Sensor M}}
+							}
+					;
+				\end{tikzpicture}
+				\caption{Red industrial Gador.}
 				\label{fig:redGador}
 			\end{figure}
 		
 		\subsubsection{Marco normativo}
 		
-			Para acceder al mercado de los Estados Unidos de Norte América, se deben satisfacer los requerimientos del \emph{Code of Federal Regulations - Title 21 - Food and Drugs Chapter - Part 11 (21CFR11)}. Esta es la principal razón para utilizar el sistema \emph{EBI}, ya que el producto se encuentra aprobado por la \emph{FDA}, por lo tanto, es indispensable que este ambiente de producción continúe operando aún cuando los protocolos que utiliza son antiguos.
-			
-			El primer problema que se puede observar es el acarreo de tecnologías \emph{legacy} en aras de satisfacer las normas que permiten el comercio internacional, sin incurrir en mayores erogaciones al invertir en un nuevo sistema que se encuentre aprobado por la \emph{FDA}.
+			Para acceder al mercado estadounidense, se deben satisfacer los requerimientos del \emph{Code of Federal Regulations - Title 21 - Food and Drugs Chapter - Part 11 (21CFR11)}. Esta es la principal razón para utilizar el sistema \emph{EBI}, ya que el producto se encuentra aprobado por la \emph{FDA}, por lo tanto, es indispensable que continúe operando aún cuando los protocolos que utiliza son antiguos. Tampoco es económicamente viable reemplazarlo por un producto moderno que esté aprobado por la \emph{FDA}, se debe ingresar a la industria 4.0 sin incurrir en grandes erogaciones.
 
 		\subsubsection{Metrología}
 		
-			La mediciones reportadas por los sensores deben ser significativas, eso solo puede ser logrado si el instrumental es sometido a un plan de calibración y a una reubicación periódica según estudios de mapeo térmico, que determinan los puntos críticos del volumen a medir.
-			Las recurrentes migraciones de sensores provocan costosos procesos de certificación de cableados, surge de esta situación la necesidad de utilizar modernos protocolos de comunicación inalámbrica que permitan alcanzar un consumo energético lo suficientemente bajo, para que las baterías de los sensores duren como mínimo un año.
+			La metrología es el estudio de las mediciones. En el caso de \emph{Gador}, los datos de temperatura solo son válidos si los dispositivos se someten a un plan de calibración y a una reubicación periódica según estudios de mapeo térmico. Los estudios obtienen los puntos críticos del volumen del ambiente, que son las posiciones a ocupar por los instrumentos.
 			
-			Los estudios de mapeo térmicos obtienen los puntos críticos del volumen del ambiente, estos puntos críticos son las posiciones que los sensores deben ocupar.
+			Las recurrentes migraciones de sensores provocan costosos procesos de certificación de cableados, para evitarlos se requiere un protocolo de comunicación inalámbrica que sea compatible con la cuarta revolución industrial.
 			
-			Se necesita disponer de una gestión de sensores, cuyo nivel de sofisticación deseado no es satisfecho por los \emph{PLCs}, se manifiesta entonces la necesidad de desarrollar un sistema que gestione puntos de agregación y sensores de mayor complejidad, este objetivo nace de los costosos procesos de calidad que disparan la incorrecta administración de los dispositivos, cuando estos impactan en la base de datos de \emph{EBI} con valores erróneos.		
+			La incorrecta gestión de dispositivos impacta negativamente en el funcionamiento de \emph{EBI}. La tarea no puede lograrse usando \emph{PLCs}, se necesitan puntos de agregación y sensores de mayor complejidad.
 
 \section{Introducción técnica}
 \label{introTecnica}
+
+	Para facilitar la comprensión de las tecnologías involucradas, se presentan categorizadas en un modelo de \emph{Capas estandarizadas de IoT}. En él se separan los conocimientos según su función, identificando cinco especies. Percepción, red, procesamiento, aplicación y negocio. Como se detalla en la tabla \ref{tab:modeloCapas}.
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{c|cccc}
+			Capa 			& 				& 			& 			& 		\\ \hline
+			Negocio 		& Logs 			& Usuarios 	& 			& 		\\
+			Aplicación 		& Docker 		& Servicios & JWT 		& GUI 	\\
+			Procesamiento 	& MongoDB 		& 			& 			& 		\\
+			Red 			& Modbus 		& MQTT 		& Websocker & HTTP 	\\
+			Percepción 		& Temperatura 	& Humedad 	& 			& 		\\
+		\end{tabular}
+		\caption{\label{tab:modeloCapas}Modelo de capas IoT}
+	\end{table}
+	
+	\subsection{Capa de percepción}
+	\label{capaPercepcion}
+	
+		La capa está conformada por los sensores inalámbricos que miden temperatura y humedad.
+		
+		\subsubsection{Temperatura}
+		
+			La temperatura es la excitación mecánica (vibraciones) de los átomos que componen la materia. Para medirla existen métodos electrónicos y mecánicos. Los mecánicos se basan en la expansión y contracción de los materiales al experimentar cambios térmicos, un ejemplo son los termómetros de columna de mercurio.
+		
+			La temperatura puede ser medida de forma electrónica, sus variaciones producen cambios en la resistencia que los materiales presentan al paso de la corriente eléctrica. Algunas sustancias (conductores y aislantes) cuando incrementan su temperatura, aumentan su oposición, al crecer su radio atómico y por lo tanto generar un número mayor de colisiones de las partículas que forman la corriente eléctrica (electrones). Otros materiales (semiconductores) disminuyen su oposición al liberar electrones de valencia y facilitar de esta manera la circulación de corriente.
+		
+			Otra manera de medir temperatura usando propiedades electrónicas, es unir dos metales para formar un termopar, las diferencias térmicas producen una pequeña fuente de tensión eléctrica. Se puede visualizar como una batería que produce corriente gracias a la temperatura.
+		
+		\subsubsection{Humedad}
+		
+			La humedad se refiere a la capacidad del aire para transportar partículas de agua. Si la humedad es alta, significa que se está llegando al punto donde el aire ya no puede absorber más agua, a medida que la humedad baja el aire se aleja del punto de saturación. La cantidad de agua que el aire puede sostener depende de la presión atmosférica y de la temperatura.
+		
+			Una manera de medir la humedad sin involucrar electrónica es utilizando un psicrómetro, que está formado por dos termómetros, uno seco y otro con bulbo húmedo. Se utiliza una tabla donde se especifica cuál es la humedad relativa del aire en función de las diferencias de temperatura.
+		
+			Las mediciones electrónicas de humedad se basan en la modificación de las propiedades dialéctricas de los materiales, esto es que tanto se alinean los electrones al someter la sustancia a un campo eléctrico. Como resultado se altera el campo eléctrico original. La medición del campo es función de la humedad del aire.
+		
+	\subsection{Capa de red}
+	\label{capaRed}
+	
+		Esta capa agrupa las tecnologías que permiten la conectividad de los dispositivos y ordenadores.
+	
+		\subsubsection{HTTP}
+		
+			El protocolo \emph{HTTP} permite realizar una petición de datos y recursos siguiendo una arquitectura de cliente/servidor. El cliente inicia la sesión y realiza un pedido, el servidor responde al pedido y se cierra la comunicación. Existe la variante \emph{HTTPS} que agrega seguridad en la comunicación.
+		
+		\subsubsection{WebSocket}
+		
+			Este protocolo es una mejora respecto de \emph{HTTP}, proporciona un canal de comunicación bidireccional donde el cliente y el servidor pueden enviarse mensajes de forma espontánea. Permite realizar \emph{streaming} de contenido o aplicaciones de mensajería como un \emph{chat}.
+		
+		\subsubsection{Modbus}
+		
+			\emph{Modbus} es un protocolo basado en el esquema de cliente/servidor diseñado para dispositivos industriales sometidos a las limitaciones tecnológicas del año 1979. En consecuencia, su diseño no es adecuado para la \emph{industria 4.0}
+		
+		\subsubsection{MQTT}
+		
+			\emph{MQTT} se basa en un modelo de publicación/subscripción, donde algunos dispositivos se subscriben a un \emph{topic} y otros dispositivos realizan publicaciones. Quienes están subscritos escuchan las publicaciones. El protocolo está diseñado para funcionar en dispositivos que necesitan un código ligero que no consuma un gran ancho de banda. El estándar es compatible con las actuales tecnologías y es una mejora respecto de \emph{Modbus}.
+						
+			\begin{figure}[h]
+				\centering
+				\begin{tikzpicture}
+					
+					\tikzstyle{broker} = [circle,draw=black]
+					\tikzstyle{publish} = [rectangle,draw=black]
+					\tikzstyle{subscribe} = [rectangle,draw=black]
+					\tikzstyle{notsuscribe} = [rectangle,fill=black!10]
+					\tikzstyle{flecha} = [->,very thick]
+				
+					\node[publish] (p)	at (0,0)	{Sensor};
+					\node[broker] (b) 		at (3,0)	{Broker};
+					\node[subscribe] (s1)	at (6,3)	{Cliente 1};
+					\node[notsuscribe] (s2)	at (6,0)	{Cliente 2};
+					\node[subscribe] (s3)	at (6,-3)	{Cliente 3};
+					
+					\draw[flecha] (p) edge (b);
+					\draw[flecha] (b) edge (s1);
+					\draw[flecha] (b) edge (s3);
+				
+				\end{tikzpicture}
+				\caption{Ejemplo de comunicación MQTT.}
+				\label{fig:mqttEjemplo}
+			\end{figure}
+	
+	\subsection{Capa de procesamiento}
+	\label{capaProcesamiento}
+	
+	\subsection{Capa de aplicación}
+	\label{capaAplicacion}
+	
+	\subsection{Capa de negocio}
+	\label{capaNegocio}
+	
+		
 
 \section{Estado del arte}
 \label{estadoArte}
