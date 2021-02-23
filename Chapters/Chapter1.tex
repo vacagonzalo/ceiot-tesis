@@ -98,12 +98,12 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\begin{table}
 		\centering
 		\begin{tabular}{c|cccc}
-			Capa 			& 				& 			& 			& 		\\ \hline
-			Negocio 		& Logs 			& Usuarios 	& 			& 		\\
-			Aplicación 		& Docker 		& Servicios & JWT 		& GUI 	\\
-			Procesamiento 	& MongoDB 		& 			& 			& 		\\
-			Red 			& Modbus 		& MQTT 		& Websocker & HTTP 	\\
-			Percepción 		& Temperatura 	& Humedad 	& 			& 		\\
+			Capa 			& 				& 			& 			& 			\\ \hline
+			Negocio 		& Logs 			& Usuarios 	& 			& 			\\
+			Aplicación 		& Docker 		& Backend 	& Frontend	& Servicios	\\
+			Procesamiento 	& MongoDB 		& 			& 			& 			\\
+			Red 			& Modbus 		& MQTT 		& Websocker & HTTP 		\\
+			Percepción 		& Temperatura 	& Humedad 	& 			& 			\\
 		\end{tabular}
 		\caption{\label{tab:modeloCapas}Modelo de capas IoT}
 	\end{table}
@@ -148,7 +148,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 		
 		\subsubsection{MQTT}
 		
-			\emph{MQTT} se basa en un modelo de publicación/subscripción, donde algunos dispositivos se subscriben a un \emph{topic} y otros dispositivos realizan publicaciones. Quienes están subscritos escuchan las publicaciones. El protocolo está diseñado para funcionar en dispositivos que necesitan un código ligero que no consuma un gran ancho de banda. El estándar es compatible con las actuales tecnologías y es una mejora respecto de \emph{Modbus}.
+			\emph{MQTT} se basa en un modelo de publicación/subscripción, donde algunos dispositivos se subscriben a un \emph{topic} y otros dispositivos realizan publicaciones. Quienes están subscritos escuchan las publicaciones. El protocolo está diseñado para funcionar en dispositivos que necesitan un código ligero que no consuma un gran ancho de banda. El estándar es compatible con las actuales tecnologías y es una mejora respecto de \emph{Modbus}. En la figura \ref{fig:mqttEjemplo}, se observa como un sensor publica una medición al \emph{broker} y este lo reparte entre los clientes 1 y 3 que se encuentran subscritos, sin embargo el cliente 2 es ignorado ya que no se encuentra en el mismo \emph{topic}.
 						
 			\begin{figure}[h]
 				\centering
@@ -178,8 +178,22 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\subsection{Capa de procesamiento}
 	\label{capaProcesamiento}
 	
+		En esta capa residen los datos y posibilita su acceso y procesamiento. Se encuentra la base de datos utilizada, \emph{MongoDB}.
+		
+		\emph{MongoDB} es un sistema de base de datos orientada a documentos donde no existen tablas ni esquemas. Cada documento puede tener una estructura única dentro de la colección. En esta base se guardan las mediciones, los sensores y usuarios.
+	
 	\subsection{Capa de aplicación}
 	\label{capaAplicacion}
+	
+		Se agrupan las tecnologías responsables de proporcionar servicios al usuario final y entre dispositivos.
+		
+		\subsubsection{Docker}
+		
+			\emph{Docker} automatiza el despliegue de aplicaciones. Las aplicaciones quedan aisladas en una abstracción denominada \emph{contenedores}, que se comportan similar a una máquina virtual. Se genera una red interna que conecta a los \emph{contenedores} entre sí y permite controlar quienes están expuestos al exterior.
+		
+		\subsubsection{Servicios}
+		
+		\subsubsection{GUI}
 	
 	\subsection{Capa de negocio}
 	\label{capaNegocio}
