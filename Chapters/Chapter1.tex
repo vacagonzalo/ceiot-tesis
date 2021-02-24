@@ -191,14 +191,22 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 		
 			\emph{Docker} automatiza el despliegue de aplicaciones. Las aplicaciones quedan aisladas en una abstracción denominada \emph{contenedores}, que se comportan similar a una máquina virtual. Se genera una red interna que conecta a los \emph{contenedores} entre sí y permite controlar quienes están expuestos al exterior.
 		
+		\subsubsection{Backend}
+		
+			Es el encargado de entregar los datos guardados en \emph{MongoDB} al usuario final.
+		
+		\subsubsection{Frontend}
+		
+			Tiene la función de generar la interfaz gráfica que utiliza el usuario. Es del tipo \emph{Single Web Application}, en este esquema el usuario recibe todo el código necesario para generar todos los componentes gráficos que ve en pantalla y solo se accede al servidor para obtener nuevos datos a mostrar.
+		
 		\subsubsection{Servicios}
 		
-		\subsubsection{GUI}
+			Existen una variedad de contenedores que se encargan de comunicar los dispositivos con la base de datos y suministrar información en tiempo real utilizando un \emph{WebSocket}. También entregan las mediciones al servidor \emph{EBI}.
 	
 	\subsection{Capa de negocio}
 	\label{capaNegocio}
 	
-		
+		La capa de negocio tiene la función de establecer las reglas que deben cumplirse, en el proyecto realizado se definen los permisos de cada usuario dentro del sistema y el historial de acciones que pueden alterar el normal funcionamiento de la solución.
 
 \section{Estado del arte}
 \label{estadoArte}
