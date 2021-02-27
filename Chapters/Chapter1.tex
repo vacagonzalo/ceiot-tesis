@@ -160,11 +160,11 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 					\tikzstyle{notsuscribe} = [rectangle,fill=black!10]
 					\tikzstyle{flecha} = [->,very thick]
 				
-					\node[publish] (p)	at (0,0)	{Sensor};
-					\node[broker] (b) 		at (3,0)	{Broker};
-					\node[subscribe] (s1)	at (6,3)	{Cliente 1};
-					\node[notsuscribe] (s2)	at (6,0)	{Cliente 2};
-					\node[subscribe] (s3)	at (6,-3)	{Cliente 3};
+					\node[publish] (p) {Sensor};
+					\node[broker,right=of p] (b) {Broker};
+					\node[notsuscribe, right=of b] (s2)	{Cliente 2};
+					\node[subscribe,above=of s2] (s1) {Cliente 1};
+					\node[subscribe, below=of s2] (s3) {Cliente 3};
 					
 					\draw[flecha] (p) edge (b);
 					\draw[flecha] (b) edge (s1);
@@ -206,10 +206,64 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\subsection{Capa de negocio}
 	\label{capaNegocio}
 	
-		La capa de negocio tiene la función de establecer las reglas que deben cumplirse, en el proyecto realizado se definen los permisos de cada usuario dentro del sistema y el historial de acciones que pueden alterar el normal funcionamiento de la solución.
+		La capa de negocio tiene la función de establecer las reglas que deben cumplirse, en el proyecto realizado se definen los permisos de cada usuario dentro del sistema y el historial de acciones que pueden alterar el normal funcionamiento de la solución. En el proyecto realizado, esta capa está representada por la persistencia de \emph{Logs} y la administración de usuarios.
 
 \section{Estado del arte}
 \label{estadoArte}
+
+	Utilizando el modelo de capas definido en la sección \ref{introTecnica}, se define la situación actual de las tecnologías involucradas.
+	
+	\subsection{Capa de percepción}
+	\label{artPercepcion}
+	
+		Los nodos sensores se resuelven utilizando \emph{Sistemas en Chip (SoC)}, donde en un único módulo se obtienen todas las necesidades de hardware para resolver la medición y la transmisión de datos. Los nodos son programados con sistemas operativos de tiempo real compatibles con las capas siguientes, para facilitar el diseño y la integración de las partes.
+	
+	\subsection{Capa de red}
+	\label{artRed}
+	
+		Se utilizan protocolos inalámbricos aptos para dispositivos que funcionan a batería como \emph{6LoWPAN}, \emph{Bluetooth LE}, \emph{ZigBee}, \emph{Sigfox}, \emph{LoRaWAN}, entre otros. Actualmente, estos protocolos se encuentran en competencia y se debe determinar cuales de ellos terminarán por imponerse en el mercado.
+		
+		Teniendo definido los protocolos de conexión, se definen aquellos que determinan el flujo de datos. Los más importantes son \emph{HTTPS}, \emph{WebSocket Secure}, \emph{MQTT}, \emph{Kafka}, \emph{Amazon SQS} y \emph{Google Cloud Messaging}.
+	
+	\subsection{Capa de procesamiento}
+	\label{artProcesamiento}
+	
+		Los datos se persisten en un sistema que provee alta disponibilidad. Esto se logra creando réplicas llamadas \emph{replica sets}, de esta manera si un servidor cae hay otros que pueden tomar su lugar. Los datos son divididos en particiones lógicas llamadas \emph{shards}, un ejemplo sería separar los datos por país, de esta manera se pueden colocar servidores que se encuentren distribuidos geográficamente con los datos pertinentes para cada lugar.
+		
+		Para lograr que todo funcione como un único sistema, hay un \emph{replica set} de servidores que contienen la configuración de la solución. Finalmente existen servidores del tipo \emph{router} que permiten la conexión con el exterior. Este esquema se puede visualizar en la figura \ref{fig:mongodb}.
+	
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+					
+				\tikzstyle{block} = [rectangle,draw=black]
+				
+				\node[block] (r) {Router};
+				\node[below=of r] (aux) {};
+				\node[block,right=of aux] (c) {Config};
+				\node[block,below=of aux] (s1) {Shard 3};
+				\node[block,left=of s1] (s2) {Shard 2};
+				\node[block,left=of s2] (s3) {Shard 1};
+				
+				\draw (r)--(s1);
+				\draw (s2)|-(c);
+				\draw (s3)|-(aux);
+				\draw (c)--(aux);
+				
+			\end{tikzpicture}
+			\caption{Arquitectura de datos de alta disponibilidad.}
+			\label{fig:mongodb}
+		\end{figure}
+	
+	\subsection{Capa de aplicación}
+	\label{artAplicacion}
+	
+		Existen soluciones en la nube como por ejemplo \emph{Amazon Web Service (aws)}, \emph{Google Cloud} o \emph{Azure} que permiten crear rápidamente las aplicaciones. También es posible utilizar un sistema de orquestación escalable como \emph{kubernetes}.
+	
+	\subsection{Capa de negocio}
+	\label{artNegocio}	
+	
+		Los sistemas en la nube también ofrecen facilidades para implementar una para de negocios. Existen además soluciones de código abierto que permiten construirla, como por ejemplo \emph{Grafana} o \emph{Checkmk}.
 
 \section{Objetivos y alcance}
 \label{objetivos}
