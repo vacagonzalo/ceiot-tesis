@@ -31,7 +31,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 
 			La segunda revolución industrial suplantó la capacidad de polivalencia al crear líneas de montaje, fue el inicio de la organización productiva moderna.
 
-			Un tercer hito fue la llegada de la electrónica y robótica, se reemplazó la motricidad fina y gruesa, y control manual de actuadores. 
+			Un tercer hito fue la llegada de la electrónica y robótica, se reemplazó la motricidad fina y gruesa, y el control manual de actuadores. 
 
 			La etapa actual (\emph{industria 4.0}) consiste en superar algunas capacidades cognitivas, al interconectar dispositivos y ordenadores. Logrando persistencia en las mediciones, y su análisis usando inteligencia artificial.
 	
@@ -196,7 +196,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 		
 		\subsubsection{Frontend}
 		
-			Tiene la función de generar la interfaz gráfica que utiliza el usuario. Es del tipo \emph{Single Web Application}, en este esquema el usuario recibe todo el código necesario para generar todos los componentes gráficos que ve en pantalla y solo se accede al servidor para obtener nuevos datos a mostrar.
+			Tiene la función de generar la interfaz gráfica que utiliza el usuario. Es del tipo \emph{Single Web Application}, en este esquema el usuario recibe todo el código necesario para generar todos los componentes gráficos que ven en pantalla y solo se accede al servidor para obtener nuevos datos a mostrar.
 		
 		\subsubsection{Servicios}
 		
@@ -205,7 +205,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\subsection{Capa de negocio}
 	\label{capaNegocio}
 	
-		La capa de negocio tiene la función de establecer las reglas que deben cumplirse, en el proyecto realizado se definen los permisos de cada usuario dentro del sistema y el historial de acciones que pueden alterar el normal funcionamiento de la solución. En el proyecto realizado, esta capa está representada por la persistencia de \emph{Logs} y la administración de usuarios.
+		La capa de negocio tiene la función de establecer las reglas que deben cumplirse, en el proyecto realizado se definen los permisos de cada usuario dentro del sistema y el historial de acciones que pueden alterar el normal funcionamiento de la solución. Esta capa está representada por la persistencia de \emph{Logs} y la administración de usuarios.
 
 \section{Estado del arte}
 \label{estadoArte}
@@ -262,11 +262,15 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\subsection{Capa de negocio}
 	\label{artNegocio}	
 	
-		Los sistemas en la nube también ofrecen facilidades para implementar una para de negocios. Existen además soluciones de código abierto que permiten construirla, como por ejemplo \emph{Grafana} o \emph{Checkmk}.
+		Los sistemas en la nube también ofrecen facilidades para implementar una capa de negocios. Existen además soluciones de código abierto que permiten construirla, como por ejemplo \emph{Grafana} o \emph{Checkmk}.
 
 \section{Objetivos y alcance}
 \label{objetivos}
 	\subsection{Objetivos}
+	
+		El objetivo de este trabajo es realizar una prueba de concepto que demuestre que es posible integrar un sistema crítico y propietario que utiliza tecnologías antiguas, con una solución compatible con \emph{Internet de las Cosas}.
+		
+		En la solución se utiliza la red \emph{TCP/IP} que comunica al servidor \emph{EBI} con los \emph{PLCs} por protocolo \emph{Modbus}. En esa misma red se colocan nuevos puntos de agregación que utilizan el protocolo \emph{MQTT} y se comunican con el servidor \emph{Nodos}. Finalmente, el servidor \emph{Nodos} se presenta ante \emph{EBI} como si fuese un \emph{PLC} más de la red y le reporta las mediciones en formato \emph{Modbus}. El esquema final queda visualizado en la figura \ref{fig:esquemaProyecto}.
 	
 	\begin{figure}[h]
 			\centering
@@ -309,7 +313,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 				
 			\end{tikzpicture}
 			\caption{Esquema del proyecto.}
-			\label{fig:mongodb}
+			\label{fig:esquemaProyecto}
 		\end{figure}
 	
 	\subsection{Alcance}
