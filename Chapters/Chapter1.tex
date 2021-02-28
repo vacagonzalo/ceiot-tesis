@@ -157,12 +157,11 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 					\tikzstyle{broker} = [circle,draw=black]
 					\tikzstyle{publish} = [rectangle,draw=black]
 					\tikzstyle{subscribe} = [rectangle,draw=black]
-					\tikzstyle{notsuscribe} = [rectangle,fill=black!10]
 					\tikzstyle{flecha} = [->,very thick]
 				
 					\node[publish] (p) {Sensor};
 					\node[broker,right=of p] (b) {Broker};
-					\node[notsuscribe, right=of b] (s2)	{Cliente 2};
+					\node[subscribe, right=of b] (s2)	{Cliente 2};
 					\node[subscribe,above=of s2] (s1) {Cliente 1};
 					\node[subscribe, below=of s2] (s3) {Cliente 3};
 					
@@ -267,3 +266,71 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 
 \section{Objetivos y alcance}
 \label{objetivos}
+	\subsection{Objetivos}
+	
+	\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+					
+				\tikzstyle{block} = [rectangle,draw=black]
+				
+				\node[block] (s1) {Sensor 1};
+				\node[block,right=of s1] (s2) {Sensor 2};
+				\node[block,right=of s2] (s3) {Sensor 3};
+				\node[block,right=of s3] (s4) {Sensor 4};
+				\node[block,right=of s4] (sn) {Sensor n};
+				
+				\node[block,below=of s2] (a1) {Agregación 1};
+				\node[block,below=of s4] (a2) {Agregación 2};
+				
+				\node[below=of s1] (aux1) {};
+				\node[below=of s3] (aux3) {};
+				\node[below=of sn] (auxn) {};
+				
+				\node[below=of aux1] (tcp1) {};
+				\node[below=of a1] (tcp2) {};
+				\node[below=of aux3] (tcp3) {TCP/IP};
+				\node[below=of a2] (tcp4) {};
+				\node[below=of auxn] (tcpn) {};
+				
+				\node[block, below=of tcp2] (ebi) {EBI};
+				\node[block, below=of tcp4] (nodos) {Nodos};
+				
+				\draw (tcp1)--(tcpn);
+				\draw (ebi)--(a1);
+				\draw (nodos)--(a2);
+				
+				\draw (s1)--(a1);
+				\draw (s2)--(a1);
+				\draw (s3)--(a1);
+				
+				\draw (s4)--(a2);
+				\draw (sn)--(a2);		
+				
+			\end{tikzpicture}
+			\caption{Esquema del proyecto.}
+			\label{fig:mongodb}
+		\end{figure}
+	
+	\subsection{Alcance}
+	
+		El proyecto no contempla el diseño del hardware, en esta categoría se encuentran los sensores y los puntos de agregación. Solo está contemplado realizar el software que forma parte del servidor \emph{Nodos}.
+	
+	\subsection{Requerimientos}
+	\label{requerimientos}
+		\begin{itemize}
+			\item Debe integrarse a la infraestructura de Gador S.A. sin generar conflictos en otros sistemas.
+			\item Debe crear tramas en el formato \emph{Enterprise Buildings Integrator} y enviarlas al servidor.
+			\item Debe interpretar eventuales mensajes del servidor \emph{Honeywell}.
+			\item Debe interpretar los mensajes de los sensores.
+			\item Debe poder cambiar la frecuencia de lectura de mediciones.
+			\item Debe poseer la capacidad de gestionar los ingresos de usuarios de forma segura.
+			\item Debe permitir que por lo menos 5 (cinco) usuarios accedan al sistema simultáneamente.
+			\item Debe presentar una interfaz donde se monitoree el estado de los sensores
+			\item Debe permitir elegir un sensor en particular para editarlo.
+			\item Debe poseer un módulo de gestión de usuarios.
+			\item Debe ser compatible con ordenadores de escritorio y \emph{smartphones}.
+			\item Las contraseñas no persistirán como texto plano.
+			\item Debe persistir todas las modificaciones realizadas a la configuración de los sensores.
+			\item Debe persistir las mediciones obtenidas.
+		\end{itemize}
