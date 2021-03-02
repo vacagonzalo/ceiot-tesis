@@ -70,12 +70,12 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\begin{table}
 		\centering
 		\begin{tabular}{c|cccc}
-			Capa 			& 				& 			& 			& 			\\ \hline
-			Negocio 		& Logs 			& Usuarios 	& 			& 			\\
-			Aplicación 		& Docker 		& Backend 	& Frontend	& Servicios	\\
-			Procesamiento 	& MongoDB 		& 			& 			& 			\\
-			Red 			& Modbus 		& MQTT 		& Websocker & HTTP 		\\
-			Percepción 		& Temperatura 	& Humedad 	& 			& 			\\
+			Capa          &             &           &           &           \\ \hline
+			Negocio       & Logs        & Usuarios  &           &           \\
+			Aplicación    & Docker      & Backend   & Frontend  & Servicios \\
+			Procesamiento & MongoDB     &           &           &           \\
+			Red           & Modbus      & MQTT      & Websocker & HTTP      \\
+			Percepción    & Temperatura & Humedad 	&           &           \\
 		\end{tabular}
 		\caption{\label{tab:modeloCapas}Modelo de capas IoT}
 	\end{table}
@@ -85,21 +85,15 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	
 		La capa está conformada por los sensores inalámbricos que miden temperatura y humedad.
 		
-		\subsubsection{Sensores de temperatura}
+		La temperatura es la excitación mecánica (vibraciones) de los átomos que componen la materia. Para medirla existen métodos electrónicos y mecánicos. Los mecánicos se basan en la expansión y contracción de los materiales al experimentar cambios térmicos, un ejemplo son los termómetros de columna de mercurio.
 		
-			La temperatura es la excitación mecánica (vibraciones) de los átomos que componen la materia. Para medirla existen métodos electrónicos y mecánicos. Los mecánicos se basan en la expansión y contracción de los materiales al experimentar cambios térmicos, un ejemplo son los termómetros de columna de mercurio.
+		La temperatura puede ser medida de forma electrónica, sus variaciones producen cambios en la resistencia que los materiales presentan al paso de la corriente eléctrica. Algunas sustancias (conductores y aislantes) cuando incrementan su temperatura, aumentan su oposición, al crecer su radio atómico y por lo tanto generar un número mayor de colisiones de las partículas que forman la corriente eléctrica (electrones). Otros materiales (semiconductores) disminuyen su oposición al liberar electrones de valencia y facilitar de esta manera la circulación de corriente. Otra manera de medir temperatura usando propiedades electrónicas, es unir dos metales para formar un termopar, las diferencias térmicas producen una pequeña fuente de tensión eléctrica. Se puede visualizar como una batería que produce corriente gracias a la temperatura.
 		
-			La temperatura puede ser medida de forma electrónica, sus variaciones producen cambios en la resistencia que los materiales presentan al paso de la corriente eléctrica. Algunas sustancias (conductores y aislantes) cuando incrementan su temperatura, aumentan su oposición, al crecer su radio atómico y por lo tanto generar un número mayor de colisiones de las partículas que forman la corriente eléctrica (electrones). Otros materiales (semiconductores) disminuyen su oposición al liberar electrones de valencia y facilitar de esta manera la circulación de corriente.
+		La humedad se refiere a la capacidad del aire para transportar partículas de agua. Si la humedad es alta, significa que se está llegando al punto donde el aire ya no puede absorber más agua, a medida que la humedad baja el aire se aleja del punto de saturación. La cantidad de agua que el aire puede sostener depende de la presión atmosférica y de la temperatura.
 		
-			Otra manera de medir temperatura usando propiedades electrónicas, es unir dos metales para formar un termopar, las diferencias térmicas producen una pequeña fuente de tensión eléctrica. Se puede visualizar como una batería que produce corriente gracias a la temperatura.
+		Una manera de medir la humedad sin involucrar electrónica es utilizando un psicrómetro, que está formado por dos termómetros, uno seco y otro con bulbo húmedo. Se utiliza una tabla donde se especifica cuál es la humedad relativa del aire en función de las diferencias de temperatura.
 		
-		\subsubsection{Sensores de humedad}
-		
-			La humedad se refiere a la capacidad del aire para transportar partículas de agua. Si la humedad es alta, significa que se está llegando al punto donde el aire ya no puede absorber más agua, a medida que la humedad baja el aire se aleja del punto de saturación. La cantidad de agua que el aire puede sostener depende de la presión atmosférica y de la temperatura.
-		
-			Una manera de medir la humedad sin involucrar electrónica es utilizando un psicrómetro, que está formado por dos termómetros, uno seco y otro con bulbo húmedo. Se utiliza una tabla donde se especifica cuál es la humedad relativa del aire en función de las diferencias de temperatura.
-		
-			Las mediciones electrónicas de humedad se basan en la modificación de las propiedades dialéctricas de los materiales, esto es que tanto se alinean los electrones al someter la sustancia a un campo eléctrico. Como resultado se altera el campo eléctrico original. La medición del campo es función de la humedad del aire.
+		Las mediciones electrónicas de humedad se basan en la modificación de las propiedades dialéctricas de los materiales, esto es que tanto se alinean los electrones al someter la sustancia a un campo eléctrico. Como resultado se altera el campo eléctrico original. La medición del campo es función de la humedad del aire.
 		
 	\subsection{Capa de red}
 	\label{capaRed}
@@ -168,20 +162,11 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 
 	Utilizando el modelo de capas definido en la sección \ref{introTecnica}, se define la situación actual de las tecnologías involucradas.
 	
-	\subsection{Capa de percepción}
-	\label{artPercepcion}
-	
 		Los nodos sensores se resuelven utilizando \emph{Sistemas en Chip (SoC)}, donde en un único módulo se obtienen todas las necesidades de hardware para resolver la medición y la transmisión de datos. Los nodos son programados con sistemas operativos de tiempo real compatibles con las capas siguientes, para facilitar el diseño y la integración de las partes.
 	
-	\subsection{Capa de red}
-	\label{artRed}
-	
-		Se utilizan protocolos inalámbricos aptos para dispositivos que funcionan a batería como \emph{6LoWPAN}, \emph{Bluetooth LE}, \emph{ZigBee}, \emph{Sigfox}, \emph{LoRaWAN}, entre otros. Actualmente, estos protocolos se encuentran en competencia y se debe determinar cuales de ellos terminarán por imponerse en el mercado.
+	Se utilizan protocolos inalámbricos aptos para dispositivos que funcionan a batería como \emph{6LoWPAN}, \emph{Bluetooth LE}, \emph{ZigBee}, \emph{Sigfox}, \emph{LoRaWAN}, entre otros. Actualmente, estos protocolos se encuentran en competencia y se debe determinar cuales de ellos terminarán por imponerse en el mercado.
 		
 		Teniendo definido los protocolos de conexión, se definen aquellos que determinan el flujo de datos. Los más importantes son \emph{HTTPS}, \emph{WebSocket Secure}, \emph{MQTT}, \emph{Kafka}, \emph{Amazon SQS} y \emph{Google Cloud Messaging}.
-	
-	\subsection{Capa de procesamiento}
-	\label{artProcesamiento}
 	
 		Los datos se persisten en un sistema que provee alta disponibilidad. Esto se logra creando réplicas llamadas \emph{replica sets}, de esta manera si un servidor cae hay otros que pueden tomar su lugar. Los datos son divididos en particiones lógicas llamadas \emph{shards}, un ejemplo sería separar los datos por país, de esta manera se pueden colocar servidores que se encuentren distribuidos geográficamente con los datos pertinentes para cada lugar.
 		
@@ -210,19 +195,12 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 			\label{fig:mongodb}
 		\end{figure}
 	
-	\subsection{Capa de aplicación}
-	\label{artAplicacion}
-	
 		Existen soluciones en la nube como por ejemplo \emph{Amazon Web Service (aws)}, \emph{Google Cloud} o \emph{Azure} que permiten crear rápidamente las aplicaciones. También es posible utilizar un sistema de orquestación escalable como \emph{kubernetes}.
-	
-	\subsection{Capa de negocio}
-	\label{artNegocio}	
 	
 		Los sistemas en la nube también ofrecen facilidades para implementar una capa de negocios. Existen además soluciones de código abierto que permiten construirla, como por ejemplo \emph{Grafana} o \emph{Checkmk}.
 
 \section{Objetivos y alcance}
 \label{objetivos}
-	\subsection{Objetivos}
 	
 		El objetivo de este trabajo es realizar una prueba de concepto que demuestre que es posible integrar un sistema crítico y propietario que utiliza tecnologías antiguas, con una solución compatible con \emph{Internet de las Cosas}.
 		
@@ -272,11 +250,9 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 			\label{fig:esquemaProyecto}
 		\end{figure}
 	
-	\subsection{Alcance}
-	
 		El proyecto no contempla el diseño del hardware, en esta categoría se encuentran los sensores y los puntos de agregación. Solo está contemplado realizar el software que forma parte del servidor \emph{Nodos}.
 	
-	\subsection{Requerimientos}
+	\subsection{Requerimientos del cliente}
 	\label{requerimientos}
 		\begin{itemize}
 			\item Debe integrarse a la infraestructura de Gador S.A. sin generar conflictos en otros sistemas.
