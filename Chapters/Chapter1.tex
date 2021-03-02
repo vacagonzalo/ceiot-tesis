@@ -21,37 +21,15 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 
 	\subsection{Necesidades generales}
 	
-		Se analiza la situación de la industria local, que despertó el interés de realizar el proyecto.
+		La producción de bienes y servicios experimentó una serie de cambios, que reemplazaron distintos talentos humanos. Se identifican cuatro etapas, denominadas \emph{revoluciones industriales}. La primera consistió en sustituir las fuerzas físicas de hombres y bestias, en favor de nuevas fuentes de energía para obtener trabajo. Como el vapor o la electricidad. La segunda revolución industrial suplantó la capacidad de polivalencia al crear líneas de montaje, fue el inicio de la organización productiva moderna. Un tercer hito fue la llegada de la electrónica y robótica, se reemplazó la motricidad fina y gruesa, y el control manual de actuadores. La etapa actual (\emph{industria 4.0}) consiste en superar algunas capacidades cognitivas, al interconectar dispositivos y ordenadores. Logrando persistencia en las mediciones, y su análisis usando inteligencia artificial.
 
-		\subsubsection{Progreso tecnológico}
-
-			La producción de bienes y servicios experimentó una serie de cambios, que reemplazaron distintos talentos humanos. Se identifican cuatro etapas, denominadas \emph{revoluciones industriales}.
-		
-			La primera consistió en sustituir las fuerzas físicas de hombres y bestias, en favor de nuevas fuentes de energía para obtener trabajo. Como el vapor o la electricidad. 
-
-			La segunda revolución industrial suplantó la capacidad de polivalencia al crear líneas de montaje, fue el inicio de la organización productiva moderna.
-
-			Un tercer hito fue la llegada de la electrónica y robótica, se reemplazó la motricidad fina y gruesa, y el control manual de actuadores. 
-
-			La etapa actual (\emph{industria 4.0}) consiste en superar algunas capacidades cognitivas, al interconectar dispositivos y ordenadores. Logrando persistencia en las mediciones, y su análisis usando inteligencia artificial.
-	
-		\subsubsection{Modernización}
-
-			Las empresas locales están retrasadas en su progreso tecnológico, muchas no incorporaron sistemas electrónicos en sus procesos o productos. Es necesario crear un sistema que logre adaptar la tecnología en uso.
-
-		\subsubsection{Comercio internacional}
-			
-			El avance tecnológico modifica el marco normativo de las naciones, para cumplir con los nuevos requerimientos jurídicos, se necesita tener un mínimo de capital. El retraso tecnológico ya no solo genera una pérdida de competitividad, sino que también impide que las empresas coloquen sus mercancías en otros países. Por incumplimiento en normas de calidad productiva, o de protección del medio ambiente.
+		Las empresas locales están retrasadas en su progreso tecnológico, muchas no incorporaron sistemas electrónicos en sus procesos o productos, es necesario crear un sistema que logre adaptar la tecnología en uso. El avance tecnológico modifica el marco normativo de las naciones, para cumplir con los nuevos requerimientos jurídicos, se necesita tener un mínimo de capital. El retraso tecnológico ya no solo genera una pérdida de competitividad, sino que también impide que las empresas coloquen sus mercancías en otros países. Por incumplimiento en normas de calidad productiva, o de protección del medio ambiente.
 
 	\subsection{Necesidades del cliente}
 		
-		\subsubsection{Gador S.A}
-		
-			\emph{Gador S.A} es una compañía cuya misión es \emph{producir medicamentos para la salud humana, con la mejor calidad disponible, y ponerlos al alcance de la comunidad a precios accesibles}. La empresa decidió ser el cliente del proyecto realizado.
+			\emph{Gador S.A} es una compañía cuya misión es \emph{producir medicamentos para la salud humana, con la mejor calidad disponible, y ponerlos al alcance de la comunidad a precios accesibles}.
 			
-			\emph{Gador} tiene la necesidad de medir las condiciones ambientales de sus depósitos y cuartos productivos. En esos lugares se dispusieron sensores de temperatura y humedad, las mediciones son recogidas por \emph{Controladores Lógicos Programables (PLC)}, los \emph{PLC} luego reenvían los datos a un servidor \emph{Enterprise Buildings Integrator (EBI)} que fue comprado con una licencia \emph{Modbus universal} y permite comunicarse con los dispositivos en campo utilizando solo ese protocolo. Las conexiones entre las partes se encuentra visualizada en la figura \ref{fig:redGador}.
-			
-			El principal problema de la arquitectura descripta es que el protocolo \emph{Modbus} fue diseñado en el año 1979 y no es apto para integrarse a las tecnologías de la cuarta revolución industrial. Se necesita un sistema que lo adapte.
+			La empresa tiene la necesidad de medir las condiciones ambientales de sus depósitos y cuartos productivos. En esos lugares se dispusieron sensores de temperatura y humedad, las mediciones son recogidas por \emph{Controladores Lógicos Programables (PLC)}, los \emph{PLC} luego reenvían los datos a un servidor \emph{Enterprise Buildings Integrator (EBI)} que fue comprado con una licencia \emph{Modbus universal} y permite comunicarse con los dispositivos en campo utilizando solo ese protocolo. Las conexiones entre las partes se encuentra visualizada en la figura \ref{fig:redGador}. El principal problema de la arquitectura descripta es que el protocolo \emph{Modbus} fue diseñado en el año 1979 y no es apto para integrarse a las tecnologías de la cuarta revolución industrial. Se necesita un sistema que lo adapte.
 			
 			\begin{figure}[h]
 				\centering
@@ -78,17 +56,11 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 				\label{fig:redGador}
 			\end{figure}
 		
-		\subsubsection{Marco normativo}
-		
 			Para acceder al mercado estadounidense, se deben satisfacer los requerimientos del \emph{Code of Federal Regulations - Title 21 - Food and Drugs Chapter - Part 11 (21CFR11)}. Esta es la principal razón para utilizar el sistema \emph{EBI}, ya que el producto se encuentra aprobado por la \emph{FDA}, por lo tanto, es indispensable que continúe operando aún cuando los protocolos que utiliza son antiguos. Tampoco es económicamente viable reemplazarlo por un producto moderno que esté aprobado por la \emph{FDA}, se debe ingresar a la industria 4.0 sin incurrir en grandes erogaciones.
-
-		\subsubsection{Metrología}
 		
 			La metrología es el estudio de las mediciones. En el caso de \emph{Gador}, los datos de temperatura solo son válidos si los dispositivos se someten a un plan de calibración y a una reubicación periódica según estudios de mapeo térmico. Los estudios obtienen los puntos críticos del volumen del ambiente, que son las posiciones a ocupar por los instrumentos.
 			
-			Las recurrentes migraciones de sensores provocan costosos procesos de certificación de cableados, para evitarlos se requiere un protocolo de comunicación inalámbrica que sea compatible con la cuarta revolución industrial.
-			
-			La incorrecta gestión de dispositivos impacta negativamente en el funcionamiento de \emph{EBI}. La tarea no puede lograrse usando \emph{PLCs}, se necesitan puntos de agregación y sensores de mayor complejidad.
+			Las recurrentes migraciones de sensores provocan costosos procesos de certificación de cableados, para evitarlos se requiere un protocolo de comunicación inalámbrica que sea compatible con la cuarta revolución industrial. La incorrecta gestión de dispositivos impacta negativamente en el funcionamiento de \emph{EBI}. La tarea no puede lograrse usando \emph{PLCs}, se necesitan puntos de agregación y sensores de mayor complejidad.
 
 \section{Introducción técnica}
 \label{introTecnica}
@@ -113,7 +85,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	
 		La capa está conformada por los sensores inalámbricos que miden temperatura y humedad.
 		
-		\subsubsection{Temperatura}
+		\subsubsection{Sensores de temperatura}
 		
 			La temperatura es la excitación mecánica (vibraciones) de los átomos que componen la materia. Para medirla existen métodos electrónicos y mecánicos. Los mecánicos se basan en la expansión y contracción de los materiales al experimentar cambios térmicos, un ejemplo son los termómetros de columna de mercurio.
 		
@@ -121,7 +93,7 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 		
 			Otra manera de medir temperatura usando propiedades electrónicas, es unir dos metales para formar un termopar, las diferencias térmicas producen una pequeña fuente de tensión eléctrica. Se puede visualizar como una batería que produce corriente gracias a la temperatura.
 		
-		\subsubsection{Humedad}
+		\subsubsection{Sensores de humedad}
 		
 			La humedad se refiere a la capacidad del aire para transportar partículas de agua. Si la humedad es alta, significa que se está llegando al punto donde el aire ya no puede absorber más agua, a medida que la humedad baja el aire se aleja del punto de saturación. La cantidad de agua que el aire puede sostener depende de la presión atmosférica y de la temperatura.
 		
@@ -133,22 +105,14 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	\label{capaRed}
 	
 		Esta capa agrupa las tecnologías que permiten la conectividad de los dispositivos y ordenadores.
-	
-		\subsubsection{HTTP}
 		
-			El protocolo \emph{HTTP} permite realizar una petición de datos y recursos siguiendo una arquitectura de cliente/servidor. El cliente inicia la sesión y realiza un pedido, el servidor responde al pedido y se cierra la comunicación. Existe la variante \emph{HTTPS} que agrega seguridad en la comunicación.
+		El protocolo \emph{HTTP} permite realizar una petición de datos y recursos siguiendo una arquitectura de cliente/servidor. El cliente inicia la sesión y realiza un pedido, el servidor responde al pedido y se cierra la comunicación. Existe la variante \emph{HTTPS} que agrega seguridad en la comunicación.
 		
-		\subsubsection{WebSocket}
+		\emph{WebSocket} es un protocolo que mejora las limitaciones de \emph{HTTP}, proporciona un canal de comunicación bidireccional donde el cliente y el servidor pueden enviarse mensajes de forma espontánea. Permite realizar \emph{streaming} de contenido o aplicaciones de mensajería como un \emph{chat}.
 		
-			Este protocolo es una mejora respecto de \emph{HTTP}, proporciona un canal de comunicación bidireccional donde el cliente y el servidor pueden enviarse mensajes de forma espontánea. Permite realizar \emph{streaming} de contenido o aplicaciones de mensajería como un \emph{chat}.
+		\emph{Modbus} es un protocolo basado en el esquema de cliente/servidor diseñado para dispositivos industriales sometidos a las limitaciones tecnológicas del año 1979. En consecuencia, su diseño no es adecuado para la \emph{industria 4.0}
 		
-		\subsubsection{Modbus}
-		
-			\emph{Modbus} es un protocolo basado en el esquema de cliente/servidor diseñado para dispositivos industriales sometidos a las limitaciones tecnológicas del año 1979. En consecuencia, su diseño no es adecuado para la \emph{industria 4.0}
-		
-		\subsubsection{MQTT}
-		
-			\emph{MQTT} se basa en un modelo de publicación/subscripción, donde algunos dispositivos se subscriben a un \emph{topic} y otros dispositivos realizan publicaciones. Quienes están subscritos escuchan las publicaciones. El protocolo está diseñado para funcionar en dispositivos que necesitan un código ligero que no consuma un gran ancho de banda. El estándar es compatible con las actuales tecnologías y es una mejora respecto de \emph{Modbus}. En la figura \ref{fig:mqttEjemplo}, se observa como un sensor publica una medición al \emph{broker} y este lo reparte entre los clientes 1 y 3 que se encuentran subscritos, sin embargo el cliente 2 es ignorado ya que no se encuentra en el mismo \emph{topic}.
+		\emph{MQTT} se basa en un modelo de publicación/subscripción, donde algunos dispositivos se subscriben a un \emph{topic} y otros dispositivos realizan publicaciones. Quienes están subscritos escuchan las publicaciones. El protocolo está diseñado para funcionar en dispositivos que necesitan un código ligero que no consuma un gran ancho de banda. El estándar es compatible con las actuales tecnologías y es una mejora respecto de \emph{Modbus}. En la figura \ref{fig:mqttEjemplo}, se observa como un sensor publica una medición al \emph{broker} y este lo reparte entre los clientes 1 y 3 que se encuentran subscritos, sin embargo el cliente 2 es ignorado ya que no se encuentra en el mismo \emph{topic}.
 						
 			\begin{figure}[h]
 				\centering
@@ -186,21 +150,13 @@ El capítulo presenta las necesidades a satisfacer y una introducción técnica.
 	
 		Se agrupan las tecnologías responsables de proporcionar servicios al usuario final y entre dispositivos.
 		
-		\subsubsection{Docker}
+		\emph{Docker} automatiza el despliegue de aplicaciones. Las aplicaciones quedan aisladas en una abstracción denominada \emph{contenedores}, que se comportan similar a una máquina virtual. Se genera una red interna que conecta a los \emph{contenedores} entre sí y permite controlar quienes están expuestos al exterior.
 		
-			\emph{Docker} automatiza el despliegue de aplicaciones. Las aplicaciones quedan aisladas en una abstracción denominada \emph{contenedores}, que se comportan similar a una máquina virtual. Se genera una red interna que conecta a los \emph{contenedores} entre sí y permite controlar quienes están expuestos al exterior.
+		\emph{Backend} es el encargado de entregar los datos guardados en \emph{MongoDB} al usuario final.
 		
-		\subsubsection{Backend}
+		\emph{Frontend} Tiene la función de generar la interfaz gráfica que utiliza el usuario. Es del tipo \emph{Single Web Application}, en este esquema el usuario recibe todo el código necesario para generar todos los componentes gráficos que ven en pantalla y solo se accede al servidor para obtener nuevos datos a mostrar.
 		
-			Es el encargado de entregar los datos guardados en \emph{MongoDB} al usuario final.
-		
-		\subsubsection{Frontend}
-		
-			Tiene la función de generar la interfaz gráfica que utiliza el usuario. Es del tipo \emph{Single Web Application}, en este esquema el usuario recibe todo el código necesario para generar todos los componentes gráficos que ven en pantalla y solo se accede al servidor para obtener nuevos datos a mostrar.
-		
-		\subsubsection{Servicios}
-		
-			Existen una variedad de contenedores que se encargan de comunicar los dispositivos con la base de datos y suministrar información en tiempo real utilizando un \emph{WebSocket}. También entregan las mediciones al servidor \emph{EBI}.
+		Existen una variedad de contenedores que se encargan de comunicar los dispositivos con la base de datos y suministrar información en tiempo real utilizando un \emph{WebSocket}. También entregan las mediciones al servidor \emph{EBI}.
 	
 	\subsection{Capa de negocio}
 	\label{capaNegocio}
