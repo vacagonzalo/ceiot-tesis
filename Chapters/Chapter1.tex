@@ -14,259 +14,222 @@
 
 %-------------------------------------------------------------------------------
 
-El capítulo presenta las necesidades a satisfacer y una introducción técnica. El objetivo es proveer de conceptos básicos para comprender el resto de la memoria.
+El capítulo presenta las necesidades a satisfacer y una introducción técnica, con el objetivo de proveer de conceptos básicos para comprender el resto de la memoria.
 
 \section{Motivación}
-\label{motivacion}
+\label{ch1Motivacion}
 
-	\subsection{Necesidades generales}
-	
-		La producción de bienes y servicios experimentó una serie de cambios, que reemplazaron distintos talentos humanos. Se identifican cuatro etapas, denominadas \emph{revoluciones industriales}. La primera consistió en sustituir las fuerzas físicas de hombres y bestias, en favor de nuevas fuentes de energía para obtener trabajo. Como el vapor o la electricidad. La segunda revolución industrial suplantó la capacidad de polivalencia al crear líneas de montaje, fue el inicio de la organización productiva moderna. Un tercer hito fue la llegada de la electrónica y robótica, se reemplazó la motricidad fina y gruesa, y el control manual de actuadores. La etapa actual (\emph{industria 4.0}) consiste en superar algunas capacidades cognitivas, al interconectar dispositivos y ordenadores. Logrando persistencia en las mediciones, y su análisis usando inteligencia artificial.
+% Hacia adonde se dirige la tecnología
+% Internet de las cosas 
+% Cómo la próxima evolución de Internet lo cambia todo
+% Dave Evans
+% Abril de 2011
+% Cisco Internet Business Solutions Group (IBSG)
+% https://www.cisco.com/c/dam/global/es_mx/solutions/executive/assets/pdf/internet-of-things-iot-ibsg.pdf
+La tendencia tecnológica actual es interconectar los dispositivos a través de la Internet, a tal punto que la cantidad de objetos en el año 2009 superó al número de personas conectadas, y llegado el 2020 la diferencia es de seis veces en favor de las cosas.
+Los procesos industriales se ven beneficiados con nuevos métodos de control de inventarios y análisis de mediciones, además es posible gestionar los ambientes productivos para lograr una mayor calidad y comodidad.
+Los datos quedan disponibles para ser procesados por modelos de inteligencia artificial, y la información resultante puede ser vista desde cualquier ubicación y en múltiples plataformas. 
 
-		Las empresas locales están retrasadas en su progreso tecnológico, muchas no incorporaron sistemas electrónicos en sus procesos o productos, es necesario crear un sistema que logre adaptar la tecnología en uso. El avance tecnológico modifica el marco normativo de las naciones, para cumplir con los nuevos requerimientos jurídicos, se necesita tener un mínimo de capital. El retraso tecnológico ya no solo genera una pérdida de competitividad, sino que también impide que las empresas coloquen sus mercancías en otros países. Por incumplimiento en normas de calidad productiva, o de protección del medio ambiente.
+% Realidad de la industria local
+% Plan estratégico industrial 2020
+Las empresas locales están retrasadas en su progreso tecnológico, muchas no incorporaron sistemas electrónicos en sus procesos o productos, es necesario crear un sistema que logre adaptar la tecnología en uso con el fin de incorporarlas a las nuevas prácticas de negocios.
+El avance tecnológico modifica el marco normativo de las naciones, para cumplir con los nuevos requerimientos jurídicos, se necesita tener un mínimo de capital.
+El retraso tecnológico ya no solo genera una pérdida de competitividad, sino que también impide que las empresas coloquen sus mercancías en otros países, por incumplimiento en normas de calidad o de protección del medio ambiente.
+		
+% Necesidades de Gador		
+La situación de la industria argentina fue la primera razón que impulsó este trabajo, el siguiente paso fue buscar una empresa que quisiera participar de un proyecto adecuado para el pos-grado, y finalmente se logró un acuerdo con los laboratorios \emph{Gador S.A}. La misión de la compañía es \emph{producir medicamentos para la salud humana, con la mejor calidad disponible, y ponerlos al alcance de la comunidad a precios accesibles}.
 
-	\subsection{Necesidades del cliente}
-		
-			\emph{Gador S.A} es una compañía cuya misión es \emph{producir medicamentos para la salud humana, con la mejor calidad disponible, y ponerlos al alcance de la comunidad a precios accesibles}.
+La empresa tiene la necesidad de acceder al mercado estadounidense y para lograrlo se deben satisfacer los requerimientos del \emph{Code of Federal Regulations - Title 21 - Food and Drugs Chapter - Part 11 (21CFR11)}. La norma establece que los registros de las mediciones ambientales de los depósitos y cuartos productivos, se deben almacenar de forma electrónica, pero se debe demostrar que los registros tienen la misma validez y seguridad que aquellos hechos en papel. Esto se traduce en la necesidad de tener un sistema informático que se encuentre aprobado por la \emph{Food and Drug Administration (FDA)}, que es el organismo encargado de controlar los medicamentos y alimentos que ingresan a los Estados Unidos.
+Por esa razón \emph{Gador} tiene comprada una licencia del sistema \emph{Enterprise Buildings Integrator (EBI)} de la marca \emph{Honeywell}, ya que el producto se encuentra aprobado por la \emph{FDA}. 
+Si bien el programa fue adquirido hace varios años, es indispensable que continúe operando aún cuando los protocolos que utiliza son antiguos. Tampoco es económicamente viable reemplazarlo por un producto moderno que esté aprobado por la \emph{FDA}, se debe lograr un salto tecnológico manteniendo la plataforma que actualmente está operando.
+
+% Perfiles térmicos
+Los requerimientos que se deben cumplir en las mediciones ambientales de los depósitos y cuartos productivos, estipulan que los sensores se deben someter a un plan de calibración rutinario y realizarles periódicos estudios de perfiles térmicos.
+Un estudio de perfil térmico se logra tomando una serie de mediciones de temperatura en varios puntos de un ambiente, y con estos datos se procede a calcular las coordenadas de los puntos críticos del cuarto.
+Los puntos críticos son aquellos lugares donde la temperatura es la más baja o más alta dentro de la habitación.
+Teniendo los puntos críticos identificados, se procede a colocar sensores de temperatura en esos lugares.
+
+% Migración de sensores
+Los periódicos estudios de perfiles térmicos, tienen como consecuencia que cada seis meses se deben mover los sensores de temperatura.
+La tarea de migrar los dispositivos se vuelve costosa debido a que se encuentran cableados, además se debe certificar por el departamento de calidad los nuevos recorridos de los cables. El tiempo de migración y de certificación se vería reducido sensiblemente si los equipos fuesen inalámbricos, pero la licencia de \emph{EBI} que tiene \emph{Gador} no es compatible con los protocolos de comunicaciones necesarios para lograrlo.
+
+% Arquitectura de la red industrial Gador
+Las plantas de producción de la empresa siguen una arquitectura en donde los sensores reportan sus mediciones a unos \emph{controladores lógicos programables (PLCs)}, esa comunicación se logra a través de cables que los conectan. Los datos que adquieren los \emph{PLCs} son entregados al sistema \emph{EBI} utilizando un protocolo de comunicaciones llamado \emph{Modbus TCP}. 
+Este protocolo fue creado en el año 1979 y se diseñó teniendo en mente las limitaciones tecnológicas de la época, sin embargo la licencia de \emph{EBI} que adquirió \emph{Gador} solo acepta este formato. El modelo lógico de la arquitectura se puede visualizar en la figura \ref{fig:redGador}, donde se puede ver una estructura del tipo árbol donde todo converge al sistema \emph{EBI}.
 			
-			La empresa tiene la necesidad de medir las condiciones ambientales de sus depósitos y cuartos productivos. En esos lugares se dispusieron sensores de temperatura y humedad, las mediciones son recogidas por \emph{Controladores Lógicos Programables (PLC)}, los \emph{PLC} luego reenvían los datos a un servidor \emph{Enterprise Buildings Integrator (EBI)} que fue comprado con una licencia \emph{Modbus universal} y permite comunicarse con los dispositivos en campo utilizando solo ese protocolo. Las conexiones entre las partes se encuentra visualizada en la figura \ref{fig:redGador}. El principal problema de la arquitectura descripta es que el protocolo \emph{Modbus} fue diseñado en el año 1979 y no es apto para integrarse a las tecnologías de la cuarta revolución industrial. Se necesita un sistema que lo adapte.
-			
-			\begin{figure}[h]
-				\centering
-				\begin{tikzpicture}[level 1/.style={sibling distance=5cm},
-									level 2/.style={sibling distance=2.5cm}]
-					\node[circle,draw]{EBI}
-						child{
-							node[rectangle,draw]{PLC 1}
-								child[rectangle,draw]{node[rectangle,draw]{Sensor 1}}
-								child[rectangle,draw]{node[rectangle,draw]{Sensor 2}}
-							}
-						child{
-							node[rectangle,draw]{PLC 2}
-								child{node[rectangle,draw]{Sensor 3}}
-								child{node[rectangle,draw]{Sensor 4}}
-							}
-						child{
-							node[rectangle,draw]{PLC N}
-								child{node[rectangle,draw]{Sensor M}}
-							}
-					;
-				\end{tikzpicture}
-				\caption{Red industrial Gador.}
-				\label{fig:redGador}
-			\end{figure}
-		
-			Para acceder al mercado estadounidense, se deben satisfacer los requerimientos del \emph{Code of Federal Regulations - Title 21 - Food and Drugs Chapter - Part 11 (21CFR11)}. Esta es la principal razón para utilizar el sistema \emph{EBI}, ya que el producto se encuentra aprobado por la \emph{FDA}, por lo tanto, es indispensable que continúe operando aún cuando los protocolos que utiliza son antiguos. Tampoco es económicamente viable reemplazarlo por un producto moderno que esté aprobado por la \emph{FDA}, se debe ingresar a la industria 4.0 sin incurrir en grandes erogaciones.
-		
-			La metrología es el estudio de las mediciones. En el caso de \emph{Gador}, los datos de temperatura solo son válidos si los dispositivos se someten a un plan de calibración y a una reubicación periódica según estudios de mapeo térmico. Los estudios obtienen los puntos críticos del volumen del ambiente, que son las posiciones a ocupar por los instrumentos.
-			
-			Las recurrentes migraciones de sensores provocan costosos procesos de certificación de cableados, para evitarlos se requiere un protocolo de comunicación inalámbrica que sea compatible con la cuarta revolución industrial. La incorrecta gestión de dispositivos impacta negativamente en el funcionamiento de \emph{EBI}. La tarea no puede lograrse usando \emph{PLCs}, se necesitan puntos de agregación y sensores de mayor complejidad.
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[level 1/.style={sibling distance=5cm},
+						level 2/.style={sibling distance=2.5cm}]
+		\node[circle,draw]{EBI}
+			child{
+				node[rectangle,draw]{PLC 1}
+					child[rectangle,draw]{node[rectangle,draw]{Sensor 1}}
+					child[rectangle,draw]{node[rectangle,draw]{Sensor 2}}
+				}
+			child{
+				node[rectangle,draw]{PLC 2}
+					child{node[rectangle,draw]{Sensor 3}}
+					child{node[rectangle,draw]{Sensor 4}}
+				}
+			child{
+				node[rectangle,draw]{PLC N}
+				child{node[rectangle,draw]{Sensor M}}
+				}
+		;
+	\end{tikzpicture}
+	\caption{Red industrial Gador.}
+	\label{fig:redGador}
+\end{figure}
+
 
 \section{Introducción técnica}
-\label{introTecnica}
+\label{ch1IntroduccionTecnica}
 
-	Para facilitar la comprensión de las tecnologías involucradas, se presentan categorizadas en un modelo de \emph{Capas estandarizadas de IoT}. En él se separan los conocimientos según su función, identificando cinco especies. Percepción, red, procesamiento, aplicación y negocio. Como se detalla en la tabla \ref{tab:modeloCapas}.
-	
-	\begin{table}
-		\centering
-		\begin{tabular}{c|cccc}
-			Capa          &             &           &           &           \\ \hline
-			Negocio       & Logs        & Usuarios  &           &           \\
-			Aplicación    & Docker      & Backend   & Frontend  & Servicios \\
-			Procesamiento & MongoDB     &           &           &           \\
-			Red           & Modbus      & MQTT      & Websocker & HTTP      \\
-			Percepción    & Temperatura & Humedad 	&           &           \\
-		\end{tabular}
-		\caption{\label{tab:modeloCapas}Modelo de capas IoT}
-	\end{table}
-	
-	\subsection{Capa de percepción}
-	\label{capaPercepcion}
-	
-		La capa está conformada por los sensores inalámbricos que miden temperatura y humedad.
+% Presentación modelo de capas IoT
+El proyecto realizado presentó una serie de desafíos a resolver, siendo el primero de ellos la variedad de tecnologías involucradas, tanto en la problemática a manipular como en la solución a implementar. Para introducir orden en la variedad de conocimientos que forman parte del sistema desarrollado, se introduce un \emph{modelo de capas de Internet de las cosas (IoT)}. El modelo tiene la ventaja que separa los temas en categorías relacionadas con la función o servicio que prestan en la solución, de la misma manera, cuando se habla de la biología humana y sus múltiples partes y órganos al utilizar el modelo de sistemas del cuerpo humano. 
+
+% Enumeración de las capas y una breve descripción de cada una
+El modelo de capas seleccionado separa los conocimientos en cinco categorías, las cuales son las capas de negocio, aplicación, procesamiento, red y percepción.
+La capa de negocio agrupa todo lo relacionado con las reglas y el control del sistema, esto incluye supervisar el tráfico de información, verificar el estado de los equipos u otorgar permisos a los usuarios para interactuar con el programa.
+La capa de aplicación relaciona todas las tecnologías que se encargan de interactuar con el usuario final, es lo que las personas pueden ver como el sistema.
+La capa de procesamiento agrupa los conocimientos cuya responsabilidad es almacenar y analizar los datos que se generan.
+La capa de red tiene la finalidad de interconectar los dispositivos para permitir el flujo de datos entre todas las partes involucradas.
+Finalmente la capa de percepción se refiere a todos los artefactos que manipulan o miden algo que se encuentra en el ambiente, como un sensor o un actuador. Este modelo se encuentra resumido en la tabla \ref{tab:modeloCapas}.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|c}
+		Capa          & Función                                  \\ \hline
+		Negocio       & Establecer reglas y controlar el sistema \\
+		Aplicación    & Interactuar con el usuario               \\
+		Procesamiento & Almacenar y analizar los datos obtenidos \\
+		Red           & Transportar los datos entre dispositivos \\
+		Percepción    & Realizar mediciones o acciones en planta \\
+	\end{tabular}
+	\caption{\label{tab:modeloCapas}Modelo de capas IoT.}
+\end{table}
+
+% Capa de negocios
+Dependiendo del modelo viabilidad económica de un sistema y de como fue desplegado, la capa de negocio puede tener una funcionalidad contable y calcular los costos de operación.
+Esta capa puede ser la encargada de determinar y generar la facturación para cobrarle a los usuarios de la aplicación, como así también, de resolver operaciones de transferencia de dinero. La interacción en este nivel es con el personal que administra un sistema, se determina que permisos tiene cada usuario para manipular los servicios ofrecidos y se lleva adelante el registro de acciones y eventos relevantes para el normal funcionamiento del programa.
+
+% Capa de aplicación
+
+% Capa de procesamiento
+
+% Capa de red
 		
-		La temperatura es la excitación mecánica (vibraciones) de los átomos que componen la materia. Para medirla existen métodos electrónicos y mecánicos. Los mecánicos se basan en la expansión y contracción de los materiales al experimentar cambios térmicos, un ejemplo son los termómetros de columna de mercurio.
-		
-		La temperatura puede ser medida de forma electrónica, sus variaciones producen cambios en la resistencia que los materiales presentan al paso de la corriente eléctrica. Algunas sustancias (conductores y aislantes) cuando incrementan su temperatura, aumentan su oposición, al crecer su radio atómico y por lo tanto generar un número mayor de colisiones de las partículas que forman la corriente eléctrica (electrones). Otros materiales (semiconductores) disminuyen su oposición al liberar electrones de valencia y facilitar de esta manera la circulación de corriente. Otra manera de medir temperatura usando propiedades electrónicas, es unir dos metales para formar un termopar, las diferencias térmicas producen una pequeña fuente de tensión eléctrica. Se puede visualizar como una batería que produce corriente gracias a la temperatura.
-		
-		La humedad se refiere a la capacidad del aire para transportar partículas de agua. Si la humedad es alta, significa que se está llegando al punto donde el aire ya no puede absorber más agua, a medida que la humedad baja el aire se aleja del punto de saturación. La cantidad de agua que el aire puede sostener depende de la presión atmosférica y de la temperatura.
-		
-		Una manera de medir la humedad sin involucrar electrónica es utilizando un psicrómetro, que está formado por dos termómetros, uno seco y otro con bulbo húmedo. Se utiliza una tabla donde se especifica cuál es la humedad relativa del aire en función de las diferencias de temperatura.
-		
-		Las mediciones electrónicas de humedad se basan en la modificación de las propiedades dialéctricas de los materiales, esto es que tanto se alinean los electrones al someter la sustancia a un campo eléctrico. Como resultado se altera el campo eléctrico original. La medición del campo es función de la humedad del aire.
-		
-	\subsection{Capa de red}
-	\label{capaRed}
-	
-		Esta capa agrupa las tecnologías que permiten la conectividad de los dispositivos y ordenadores.
-		
-		El protocolo \emph{HTTP} permite realizar una petición de datos y recursos siguiendo una arquitectura de cliente/servidor. El cliente inicia la sesión y realiza un pedido, el servidor responde al pedido y se cierra la comunicación. Existe la variante \emph{HTTPS} que agrega seguridad en la comunicación.
-		
-		\emph{WebSocket} es un protocolo que mejora las limitaciones de \emph{HTTP}, proporciona un canal de comunicación bidireccional donde el cliente y el servidor pueden enviarse mensajes de forma espontánea. Permite realizar \emph{streaming} de contenido o aplicaciones de mensajería como un \emph{chat}.
-		
-		\emph{Modbus} es un protocolo basado en el esquema de cliente/servidor diseñado para dispositivos industriales sometidos a las limitaciones tecnológicas del año 1979. En consecuencia, su diseño no es adecuado para la \emph{industria 4.0}
-		
-		\emph{MQTT} se basa en un modelo de publicación/subscripción, donde algunos dispositivos se subscriben a un \emph{topic} y otros dispositivos realizan publicaciones. Quienes están subscritos escuchan las publicaciones. El protocolo está diseñado para funcionar en dispositivos que necesitan un código ligero que no consuma un gran ancho de banda. El estándar es compatible con las actuales tecnologías y es una mejora respecto de \emph{Modbus}. En la figura \ref{fig:mqttEjemplo}, se observa como un sensor publica una medición al \emph{broker} y este lo reparte entre los clientes 1 y 3 que se encuentran subscritos, sin embargo el cliente 2 es ignorado ya que no se encuentra en el mismo \emph{topic}.
-						
-			\begin{figure}[h]
-				\centering
-				\begin{tikzpicture}
-					
-					\tikzstyle{broker} = [circle,draw=black]
-					\tikzstyle{publish} = [rectangle,draw=black]
-					\tikzstyle{subscribe} = [rectangle,draw=black]
-					\tikzstyle{flecha} = [->,very thick]
-				
-					\node[publish] (p) {Sensor};
-					\node[broker,right=of p] (b) {Broker};
-					\node[subscribe, right=of b] (s2)	{Cliente 2};
-					\node[subscribe,above=of s2] (s1) {Cliente 1};
-					\node[subscribe, below=of s2] (s3) {Cliente 3};
-					
-					\draw[flecha] (p) edge (b);
-					\draw[flecha] (b) edge (s1);
-					\draw[flecha] (b) edge (s3);
-				
-				\end{tikzpicture}
-				\caption{Ejemplo de comunicación MQTT.}
-				\label{fig:mqttEjemplo}
-			\end{figure}
-	
-	\subsection{Capa de procesamiento}
-	\label{capaProcesamiento}
-	
-		En esta capa residen los datos y posibilita su acceso y procesamiento. Se encuentra la base de datos utilizada, \emph{MongoDB}.
-		
-		\emph{MongoDB} es un sistema de base de datos orientada a documentos donde no existen tablas ni esquemas. Cada documento puede tener una estructura única dentro de la colección. En esta base se guardan las mediciones, los sensores y usuarios.
-	
-	\subsection{Capa de aplicación}
-	\label{capaAplicacion}
-	
-		Se agrupan las tecnologías responsables de proporcionar servicios al usuario final y entre dispositivos.
-		
-		\emph{Docker} automatiza el despliegue de aplicaciones. Las aplicaciones quedan aisladas en una abstracción denominada \emph{contenedores}, que se comportan similar a una máquina virtual. Se genera una red interna que conecta a los \emph{contenedores} entre sí y permite controlar quienes están expuestos al exterior.
-		
-		\emph{Backend} es el encargado de entregar los datos guardados en \emph{MongoDB} al usuario final.
-		
-		\emph{Frontend} Tiene la función de generar la interfaz gráfica que utiliza el usuario. Es del tipo \emph{Single Web Application}, en este esquema el usuario recibe todo el código necesario para generar todos los componentes gráficos que ven en pantalla y solo se accede al servidor para obtener nuevos datos a mostrar.
-		
-		Existen una variedad de contenedores que se encargan de comunicar los dispositivos con la base de datos y suministrar información en tiempo real utilizando un \emph{WebSocket}. También entregan las mediciones al servidor \emph{EBI}.
-	
-	\subsection{Capa de negocio}
-	\label{capaNegocio}
-	
-		La capa de negocio tiene la función de establecer las reglas que deben cumplirse, en el proyecto realizado se definen los permisos de cada usuario dentro del sistema y el historial de acciones que pueden alterar el normal funcionamiento de la solución. Esta capa está representada por la persistencia de \emph{Logs} y la administración de usuarios.
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\tikzstyle{broker} = [circle,draw=black]
+		\tikzstyle{publish} = [rectangle,draw=black]
+		\tikzstyle{subscribe} = [rectangle,draw=black]
+		\tikzstyle{flecha} = [->,very thick]
+
+		\node[publish] (p) {Sensor};
+		\node[broker,right=of p] (b) {Broker};
+		\node[subscribe, right=of b] (s2)	{Cliente 2};
+		\node[subscribe,above=of s2] (s1) {Cliente 1};
+		\node[subscribe, below=of s2] (s3) {Cliente 3};
+
+		\draw[flecha] (p) edge (b);
+		\draw[flecha] (b) edge (s1);
+		\draw[flecha] (b) edge (s3);			
+	\end{tikzpicture}
+	\caption{Ejemplo de comunicación MQTT.}
+	\label{fig:mqttEjemplo}
+\end{figure}
+
+% Capa de percepción
+
+% Despliegue de una solución
+
 
 \section{Estado del arte}
-\label{estadoArte}
+\label{ch1EstadoDelArte}
 
-	Utilizando el modelo de capas definido en la sección \ref{introTecnica}, se define la situación actual de las tecnologías involucradas.
-	
-		Los nodos sensores se resuelven utilizando \emph{Sistemas en Chip (SoC)}, donde en un único módulo se obtienen todas las necesidades de hardware para resolver la medición y la transmisión de datos. Los nodos son programados con sistemas operativos de tiempo real compatibles con las capas siguientes, para facilitar el diseño y la integración de las partes.
-	
-	Se utilizan protocolos inalámbricos aptos para dispositivos que funcionan a batería como \emph{6LoWPAN}, \emph{Bluetooth LE}, \emph{ZigBee}, \emph{Sigfox}, \emph{LoRaWAN}, entre otros. Actualmente, estos protocolos se encuentran en competencia y se debe determinar cuales de ellos terminarán por imponerse en el mercado.
-		
-		Teniendo definido los protocolos de conexión, se definen aquellos que determinan el flujo de datos. Los más importantes son \emph{HTTPS}, \emph{WebSocket Secure}, \emph{MQTT}, \emph{Kafka}, \emph{Amazon SQS} y \emph{Google Cloud Messaging}.
-	
-		Los datos se persisten en un sistema que provee alta disponibilidad. Esto se logra creando réplicas llamadas \emph{replica sets}, de esta manera si un servidor cae hay otros que pueden tomar su lugar. Los datos son divididos en particiones lógicas llamadas \emph{shards}, un ejemplo sería separar los datos por país, de esta manera se pueden colocar servidores que se encuentren distribuidos geográficamente con los datos pertinentes para cada lugar.
-		
-		Para lograr que todo funcione como un único sistema, hay un \emph{replica set} de servidores que contienen la configuración de la solución. Finalmente existen servidores del tipo \emph{router} que permiten la conexión con el exterior. Este esquema se puede visualizar en la figura \ref{fig:mongodb}.
-	
-		\begin{figure}[h]
-			\centering
-			\begin{tikzpicture}
-					
-				\tikzstyle{block} = [rectangle,draw=black]
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}		
+		\tikzstyle{block} = [rectangle,draw=black]
 				
-				\node[block] (r) {Router};
-				\node[below=of r] (aux) {};
-				\node[block,right=of aux] (c) {Config};
-				\node[block,below=of aux] (s1) {Shard 3};
-				\node[block,left=of s1] (s2) {Shard 2};
-				\node[block,left=of s2] (s3) {Shard 1};
+		\node[block] (r) {Router};
+		\node[below=of r] (aux) {};
+		\node[block,right=of aux] (c) {Config};
+		\node[block,below=of aux] (s1) {Shard 3};
+		\node[block,left=of s1] (s2) {Shard 2};
+		\node[block,left=of s2] (s3) {Shard 1};
 				
-				\draw (r)--(s1);
-				\draw (s2)|-(c);
-				\draw (s3)|-(aux);
-				\draw (c)--(aux);
-				
-			\end{tikzpicture}
-			\caption{Arquitectura de datos de alta disponibilidad.}
-			\label{fig:mongodb}
-		\end{figure}
-	
-		Existen soluciones en la nube como por ejemplo \emph{Amazon Web Service (aws)}, \emph{Google Cloud} o \emph{Azure} que permiten crear rápidamente las aplicaciones. También es posible utilizar un sistema de orquestación escalable como \emph{kubernetes}.
-	
-		Los sistemas en la nube también ofrecen facilidades para implementar una capa de negocios. Existen además soluciones de código abierto que permiten construirla, como por ejemplo \emph{Grafana} o \emph{Checkmk}.
+		\draw (r)--(s1);
+		\draw (s2)|-(c);
+		\draw (s3)|-(aux);
+		\draw (c)--(aux);		
+	\end{tikzpicture}
+	\caption{Arquitectura de datos de alta disponibilidad.}
+	\label{fig:mongodb}
+\end{figure}
+
 
 \section{Objetivos y alcance}
 \label{objetivos}
 	
-		El objetivo de este trabajo es realizar una prueba de concepto que demuestre que es posible integrar un sistema crítico y propietario que utiliza tecnologías antiguas, con una solución compatible con \emph{Internet de las Cosas}.
-		
-		En la solución se utiliza la red \emph{TCP/IP} que comunica al servidor \emph{EBI} con los \emph{PLCs} por protocolo \emph{Modbus}. En esa misma red se colocan nuevos puntos de agregación que utilizan el protocolo \emph{MQTT} y se comunican con el servidor \emph{Nodos}. Finalmente, el servidor \emph{Nodos} se presenta ante \emph{EBI} como si fuese un \emph{PLC} más de la red y le reporta las mediciones en formato \emph{Modbus}. El esquema final queda visualizado en la figura \ref{fig:esquemaProyecto}.
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}			
+		\tikzstyle{block} = [rectangle,draw=black]
+				
+		\node[block] (s1) {Sensor 1};
+		\node[block,right=of s1] (s2) {Sensor 2};
+		\node[block,right=of s2] (s3) {Sensor 3};
+		\node[block,right=of s3] (s4) {Sensor 4};
+		\node[block,right=of s4] (sn) {Sensor n};
+
+		\node[block,below=of s2] (a1) {Agregación 1};
+		\node[block,below=of s4] (a2) {Agregación 2};
+
+		\node[below=of s1] (aux1) {};
+		\node[below=of s3] (aux3) {};
+		\node[below=of sn] (auxn) {};
+
+		\node[below=of aux1] (tcp1) {};
+		\node[below=of a1] (tcp2) {};
+		\node[below=of aux3] (tcp3) {TCP/IP};
+		\node[below=of a2] (tcp4) {};
+		\node[below=of auxn] (tcpn) {};
+
+		\node[block, below=of tcp2] (ebi) {EBI};
+		\node[block, below=of tcp4] (nodos) {Nodos};
+
+		\draw (tcp1)--(tcpn);
+		\draw (ebi)--(a1);
+		\draw (nodos)--(a2);
+				
+		\draw (s1)--(a1);
+		\draw (s2)--(a1);
+		\draw (s3)--(a1);
+
+		\draw (s4)--(a2);
+		\draw (sn)--(a2);		
+	\end{tikzpicture}
+	\caption{Esquema del proyecto.}
+	\label{fig:esquemaProyecto}
+\end{figure}
 	
-	\begin{figure}[h]
-			\centering
-			\begin{tikzpicture}
-					
-				\tikzstyle{block} = [rectangle,draw=black]
-				
-				\node[block] (s1) {Sensor 1};
-				\node[block,right=of s1] (s2) {Sensor 2};
-				\node[block,right=of s2] (s3) {Sensor 3};
-				\node[block,right=of s3] (s4) {Sensor 4};
-				\node[block,right=of s4] (sn) {Sensor n};
-				
-				\node[block,below=of s2] (a1) {Agregación 1};
-				\node[block,below=of s4] (a2) {Agregación 2};
-				
-				\node[below=of s1] (aux1) {};
-				\node[below=of s3] (aux3) {};
-				\node[below=of sn] (auxn) {};
-				
-				\node[below=of aux1] (tcp1) {};
-				\node[below=of a1] (tcp2) {};
-				\node[below=of aux3] (tcp3) {TCP/IP};
-				\node[below=of a2] (tcp4) {};
-				\node[below=of auxn] (tcpn) {};
-				
-				\node[block, below=of tcp2] (ebi) {EBI};
-				\node[block, below=of tcp4] (nodos) {Nodos};
-				
-				\draw (tcp1)--(tcpn);
-				\draw (ebi)--(a1);
-				\draw (nodos)--(a2);
-				
-				\draw (s1)--(a1);
-				\draw (s2)--(a1);
-				\draw (s3)--(a1);
-				
-				\draw (s4)--(a2);
-				\draw (sn)--(a2);		
-				
-			\end{tikzpicture}
-			\caption{Esquema del proyecto.}
-			\label{fig:esquemaProyecto}
-		\end{figure}
-	
-		El proyecto no contempla el diseño del hardware, en esta categoría se encuentran los sensores y los puntos de agregación. Solo está contemplado realizar el software que forma parte del servidor \emph{Nodos}.
-	
-	\subsection{Requerimientos del cliente}
-	\label{requerimientos}
-		\begin{itemize}
-			\item Debe integrarse a la infraestructura de Gador S.A. sin generar conflictos en otros sistemas.
-			\item Debe crear tramas en el formato \emph{Enterprise Buildings Integrator} y enviarlas al servidor.
-			\item Debe interpretar eventuales mensajes del servidor \emph{Honeywell}.
-			\item Debe interpretar los mensajes de los sensores.
-			\item Debe poder cambiar la frecuencia de lectura de mediciones.
-			\item Debe poseer la capacidad de gestionar los ingresos de usuarios de forma segura.
-			\item Debe permitir que por lo menos 5 (cinco) usuarios accedan al sistema simultáneamente.
-			\item Debe presentar una interfaz donde se monitoree el estado de los sensores
-			\item Debe permitir elegir un sensor en particular para editarlo.
-			\item Debe poseer un módulo de gestión de usuarios.
-			\item Debe ser compatible con ordenadores de escritorio y \emph{smartphones}.
-			\item Las contraseñas no persistirán como texto plano.
-			\item Debe persistir todas las modificaciones realizadas a la configuración de los sensores.
-			\item Debe persistir las mediciones obtenidas.
-		\end{itemize}
+\begin{itemize}
+	\item Debe integrarse a la infraestructura de Gador S.A. sin generar conflictos en otros sistemas.
+	\item Debe crear tramas en el formato \emph{Enterprise Buildings Integrator} y enviarlas al servidor.
+	\item Debe interpretar eventuales mensajes del servidor \emph{Honeywell}.
+	\item Debe interpretar los mensajes de los sensores.
+	\item Debe poder cambiar la frecuencia de lectura de mediciones.
+	\item Debe poseer la capacidad de gestionar los ingresos de usuarios de forma segura.
+	\item Debe permitir que por lo menos 5 (cinco) usuarios accedan al sistema simultáneamente.
+	\item Debe presentar una interfaz donde se monitoree el estado de los sensores
+	\item Debe permitir elegir un sensor en particular para editarlo.
+	\item Debe poseer un módulo de gestión de usuarios.
+	\item Debe ser compatible con ordenadores de escritorio y \emph{smartphones}.
+	\item Las contraseñas no persistirán como texto plano.
+	\item Debe persistir todas las modificaciones realizadas a la configuración de los sensores.
+	\item Debe persistir las mediciones obtenidas.
+\end{itemize}
