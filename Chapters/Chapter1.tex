@@ -112,14 +112,57 @@ Finalmente la capa de percepción se refiere a todos los artefactos que manipula
 
 % Capa de negocios
 Dependiendo del modelo viabilidad económica de un sistema y de como fue desplegado, la capa de negocio puede tener una funcionalidad contable y calcular los costos de operación.
-Esta capa puede ser la encargada de determinar y generar la facturación para cobrarle a los usuarios de la aplicación, como así también, de resolver operaciones de transferencia de dinero. La interacción en este nivel es con el personal que administra un sistema, se determina que permisos tiene cada usuario para manipular los servicios ofrecidos y se lleva adelante el registro de acciones y eventos relevantes para el normal funcionamiento del programa.
+Esta capa puede ser la encargada de determinar y generar la facturación para cobrarle a los usuarios de la aplicación, como así también, de resolver operaciones de transferencia de dinero.
+La interacción en este nivel es con el personal que administra un sistema, se determina que permisos tiene cada usuario para manipular los servicios ofrecidos y se lleva adelante el registro de acciones y eventos relevantes para el normal funcionamiento del programa.
 
 % Capa de aplicación
+La experiencia que tiene el usuario al interactuar con la solución pertenece a la capa de aplicación.
+Aquí se define como se presenta la interfaz gráfica que utilizan las personas, y es común utilizar un formato de sitio web.
+Las páginas webs tienen la ventaja de ser indiferentes de la plataforma que utiliza el operador, solo importa que pueda ejecutar un navegador.
+Actualmente, se construyen las interfaces siguiendo un modelo de diseño según el tipo de operación a realizar por el programa, si la solución abarca una interfaz hombre-máquina industrial que debe ser atendida durante toda una jornada laboral, se suele implementar una norma de manejo de situaciones anormales o \emph{ASM}; si la aplicación es de uso intermitente, se puede usar un esquema de diseño material o \emph{Material Desing} que presenta una experiencia moderna y fluida.
+Para llevar a delante la interfaz seleccionada se utiliza un servidor que tiene como objetivo proveer los componentes gráficos al dispositivo utilizado, una manera de realizarlo es entregando al cliente una \emph{Single Web Application (SWP)}, logrando que el servidor otorgue todo el código necesario para que el dispositivo del usuario genere por si mismo los componentes gráficos a mostrar.
+Es importante que el código entregado pueda ser visualizado en múltiples tamaños de pantallas, en la actualidad las personas utilizan ordenadores, tabletas y teléfonos móviles que presentan grandes diferencias en sus dimensiones, cuando una aplicación cumple con este requerimiento se dice que es responsiva.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{./Figures/ch1MaterialDesign.jpg}
+	\caption{Ejemplo de interfaz de diseño material.}
+	\label{fig:ch1MaterialDesign}
+\end{figure}
 
 % Capa de procesamiento
+Para alimentar de datos a la interfaz gráfica se necesita de la capa de procesamiento, que entrega el contenido a mostrar en pantalla. La información puede ser almacenada con distintas tecnologías, siendo una de las principales, las bases de datos relacionales.
+Este tipo de base de datos se basa en un esquema de tablas que se relacionan entre sí. Este tipo de tecnología se la suele llamar \emph{SQL}, y son utilizadas principalmente en datos de inventarios y sistemas de transacciones de dinero.
+Existe otro grupo de bases de datos que se denominan no relacionales o \emph{NoSQL}, esta categoría contienen a las bases de datos tipo clave-valor, documental, de columnas y de grafos.
+
+% clave-valor
+Las bases de datos clave-valor tratan los datos como una única colección que puede tener campos completamente distintos en cada registro, no existe entonces, ningún tipo de relación entre los miembros de la colección. El uso principal de esta tecnología es gestionar diccionarios dentro de la memoria volátil, ya que se pueden definir tiempos de vida para los datos. La muerte programada de un dato puede ser utilizada para gestionar las sesiones de usuario dentro del programa.
+
+% documental
+Almacenar los datos de manera documental significa que se agrupa la información siguiendo un criterio de entidades similares, lo cual no significa que exista una estructura rígida, sino que los datos tienen una naturaleza similar.
+La persistencia se logra siguiendo un formato de codificación estandar como \emph{XML}, \emph{YAML} y \emph{JSON}.
+
+% columnas
+Las bases de datos orientadas a columnas están pensadas para minimizar el tiempo de búsqueda, principalmente en series temporales.
+La organización particular de este tipo de tecnologías es afín a los sistemas de \emph{IoT} ya que los dispositivos de mediciones suelen generar un gran volumen de datos, que se pueden organizar como series temporales.
+
+% grafos
+Una base de datos orientada a grafos presenta la información como nodos que se encuentran relacionados, la diferencia fundamental con los sistemas relacionales es que los nodos no están organizados en tablas, y las relaciones que unen los nodos tienen atributos y no poseen una estructura definida.
+Este tipo de tecnología permite utilizar la teoría de grafos y posibilita realizar consultas siguiendo modelos matemáticos que forman parte de esa rama de la ciencia.
 
 % Capa de red
-		
+Se dispone de un repertorio de protocolos para lograr que los dispositivos se comuniquen entre si, pertenecientes a la capa de red. Entre los mencionados a lo largo de esta memoria se encuentran el protocolo \emph{Modbus}, \emph{MQTT}, \emph{HTTP} y \emph{WebSocket}. El manejo de estas tecnologías fue fundamental para lograr que las distintas partes del proyecto interactúen con el exterior.
+
+% Modbus
+\emph{Modbus} es un protocolo que se diseñó teniendo en cuenta su uso para aplicaciones industriales, su prioridad es transmitir los datos manteniendo su integridad aún en ambientes donde el ruido eléctrico es elevado. El protocolo es público y gratuito, lo que provocó que se impusiera en un gran segmento del mercado ya que además es fácil de implementar y requiere poco desarrollo. Los dispositivos de una red \emph{Modbus} tienen una dirección única y por lo general se asigna un equipo como maestro y el resto como esclavos. La arquitectura descripta presenta varias ventajas, pero la antigüedad del protocolo y su diseño para dispositivos del tipo \emph{PLC}, hace que no sea adecuado para aplicaciones \emph{IoT}.
+
+% MQTT
+Para interconectar a los dispositivos bajo un esquema de publicación-subscripción se utiliza el protocolo \emph{MQTT}. El protocolo está diseñado para conexiones en lugares remotos donde los dispositivos funcionan con un ancho de banda limitado.
+El resultado es que los mensajes son pequeños y consumen poca batería de los equipos involucrados, por que se usa frecuentemente en los sistemas de \emph{IoT}. El tráfico es gestionado por un servidor del tipo \emph{Broker} que decide quienes son los destinatarios de un mensaje en particular, el resto de los dispositivos son clientes del \emph{Broker}.
+Si un cliente desea transmitir datos, lo hace realizando una publicación a un determinado \emph{topic} y el \emph{Broker} se encarga de determinar quienes deben recibir la información enviada.
+Quienes quieran obtener los datos publicados a un \emph{topic} en particular, se deben suscribir a él ante el \emph{Broker}.
+Este al recibir una publicación de un cliente la transmite solo a los clientes que se encuentres subscritos, como se puede ver en el ejemplo de la figura \ref{fig:ch1MqttEjemplo}, donde el cliente 2 no obtiene los datos del sensor porque no se encuentra subscrito.
+
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
@@ -139,37 +182,57 @@ Esta capa puede ser la encargada de determinar y generar la facturación para co
 		\draw[flecha] (b) edge (s3);			
 	\end{tikzpicture}
 	\caption{Ejemplo de comunicación MQTT.}
-	\label{fig:mqttEjemplo}
+	\label{fig:ch1MqttEjemplo}
 \end{figure}
 
+% HTTP y Websocket
+El protocolo de transferencia de hipertexto (\emph{HTTP}) está orientado a transacciones y sigue el esquema petición-respuesta entre un cliente y un servidor.
+El cliente inicia la comunicación enviando una petición al servidor, este último entrega una respuesta y se cierra el canal.
+Existe una variante del protocolo llamada \emph{HTTPS} que agrega una capa de cifrado para que las comunicaciones sean seguras.
+
+\emph{WebSocket} es un protocolo similar a \emph{HTTP} pero con la diferencia que la conexión es bidireccional, esto quiere decir que cuando se logra la conectar al cliente con el servidor, ambos pueden enviar información espontáneamente. Esta cualidad permite realizar transferencias de datos en vivo, con lo que se pueden lograr servicios de \emph{streaming} o \emph{chats}.
+
 % Capa de percepción
+Los sensores utilizados en una solución de \emph{IoT} están incluidos en la capa de percepción, y para que puedan formar parte del sistema se necesita que sean capaces de soportar alguno de los protocolos de comunicaciones mencionados. Dado que el desarrollo de estos dispositivos no formaron parte del proyecto realizado, no se ampliará demasiado en este tema.
 
 % Despliegue de una solución
+Teniendo definido los componentes de las capas, se necesita lograr que todas las partes funcionen como una única entidad. Para lograr este objetivo existen tecnologías de despliegue y orquestación, que cumplen la función de interconectar y mantener los servicios para que trabajen en equipo. Tradicionalmente se solían utilizar máquinas virtuales pero actualmente ese enfoque está quedando en desuso en favor de las tecnologías de contenedores. Una máquina virtual acapara parte de una computadora y funciona como un ordenador independiente, mientras que un contenedor funciona como un sistema operativo independiente pero no acapara los recursos de la computadora principal.
 
 
 \section{Estado del arte}
 \label{ch1EstadoDelArte}
 
+% La nube
+
+
+
 \begin{figure}[h]
 	\centering
-	\begin{tikzpicture}		
-		\tikzstyle{block} = [rectangle,draw=black]
-				
-		\node[block] (r) {Router};
-		\node[below=of r] (aux) {};
-		\node[block,right=of aux] (c) {Config};
-		\node[block,below=of aux] (s1) {Shard 3};
-		\node[block,left=of s1] (s2) {Shard 2};
-		\node[block,left=of s2] (s3) {Shard 1};
-				
-		\draw (r)--(s1);
-		\draw (s2)|-(c);
-		\draw (s3)|-(aux);
-		\draw (c)--(aux);		
-	\end{tikzpicture}
-	\caption{Arquitectura de datos de alta disponibilidad.}
-	\label{fig:mongodb}
+	\includegraphics[width=\textwidth]{./Figures/ch1StateOfTheArt.png}
+	\caption{Arquitectura de una solución en la nube.}
+	\label{fig:ch1StateOfTheArt}
 \end{figure}
+
+%\begin{figure}[h]
+%	\centering
+%	\begin{tikzpicture}		
+%		\tikzstyle{block} = [rectangle,draw=black]
+%				
+%		\node[block] (r) {Router};
+%		\node[below=of r] (aux) {};
+%		\node[block,right=of aux] (c) {Config};
+%		\node[block,below=of aux] (s1) {Shard 3};
+%		\node[block,left=of s1] (s2) {Shard 2};
+%		\node[block,left=of s2] (s3) {Shard 1};
+%				
+%		\draw (r)--(s1);
+%		\draw (s2)|-(c);
+%		\draw (s3)|-(aux);
+%		\draw (c)--(aux);		
+%	\end{tikzpicture}
+%	\caption{Arquitectura de datos de alta disponibilidad.}
+%	\label{fig:mongodb}
+%\end{figure}
 
 
 \section{Objetivos y alcance}
